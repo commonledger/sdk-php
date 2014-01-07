@@ -10,7 +10,7 @@
 			"homepage": "http://github.com/phindmarsh"
 		}
 	],
-	"keywords": [""],
+	"keywords": ["commonledger"],
 	"autoload": {
 		"psr-0": {
 			"CommonLedger\\": "lib/"
