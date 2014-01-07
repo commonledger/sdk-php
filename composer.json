@@ -1,0 +1,27 @@
+{
+	"name": "commonledger/common-ledger-sdk",
+	"version": "0.0.1",
+	"description": "Official CommonLedger API library client for PHP",
+	"homepage": "https://commonledger.com",
+	"authors": [
+		{
+			"name": "Patrick Hindmarsh",
+			"email": "patrick@hindmar.sh",
+			"homepage": "http://github.com/phindmarsh"
+		}
+	],
+	"keywords": [""],
+	"autoload": {
+		"psr-0": {
+			"CommonLedger\\": "lib/"
+		}
+	},
+	"require": {
+		"ext-json": "*",
+		"guzzle/guzzle": "3.7.*"
+	},
+	"support": {
+		"issues": "https://github.org/commonledger/sdk-php/issues"
+	},
+	"license": "MIT"
+}
