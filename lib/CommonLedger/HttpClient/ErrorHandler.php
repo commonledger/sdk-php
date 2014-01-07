@@ -22,7 +22,7 @@ class ErrorHandler
         $code = $response->getStatusCode();
 
         if ($response->isServerError()) {
-            throw new ClientException('Error '.$code, $code);
+            throw new ClientException('Error '.$code, $code, $response);
         }
 
         if ($response->isClientError()) {
@@ -46,7 +46,7 @@ class ErrorHandler
                 $message = 'Unable to understand the content type of response returned by request responsible for error';
             }
 
-            throw new ClientException($message, $code);
+            throw new ClientException($message, $code, $response);
         }
     }
 }
