@@ -5,9 +5,9 @@
 	"homepage": "https://commonledger.com",
 	"authors": [
 		{
-			"name": "Patrick Hindmarsh",
-			"email": "patrick@hindmar.sh",
-			"homepage": "http://github.com/phindmarsh"
+			"name": "Common Ledger",
+			"email": "api@commonledger.com",
+			"homepage": "http://api.commonledger.com"
 		}
 	],
 	"keywords": ["commonledger"],

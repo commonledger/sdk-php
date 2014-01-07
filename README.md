@@ -142,6 +142,32 @@ The following options are available while calling a method of an api:
  * __body__: Body of the request
  * __request_type__: Format of the request body
 
+### Authentication api
+
+Using OAuth 2.0 to connect to Common Ledger
+
+
+
+```php
+$auth = $client->auth();
+```
+
+##### Requesting a Token (POST /auth/token)
+
+After redirecting to /auth/authorise this endpoint will return an access token
+
+The following arguments are required:
+
+ * __client_id__: The application client_id
+ * __client_secret__: The application client_secret
+ * __code__: The code from the authorise request
+ * __redirect_url__: The redirect_uri used to set up the application
+ * __grant_type__: Either 'authorization_code' when requesting an access token, or 'refresh_token' when refreshing an old access token
+
+```php
+$response = $auth->token("2a7b7aaa9f05280218629fa5325eee93f448ae62", "f448ae1dcac1bb3f82f460e1b86b639c28ede333", "d6b5cdf4650d52450c90fa6dc5d527652250a159", "http://example.com/oauth_callback", "authorization_code", $options);
+```
+
 ### Accounts api
 
 Manages data relating to the Chart of Accounts
@@ -332,4 +358,4 @@ MIT
 Report [here](https://github.org/commonledger/sdk-php/issues).
 
 ## Contact
-Patrick Hindmarsh (patrick@hindmar.sh)
+Common Ledger (api@commonledger.com)

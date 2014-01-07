@@ -14,6 +14,15 @@ class Client
     }
 
     /**
+     * Using OAuth 2.0 to connect to Common Ledger
+     *
+     */
+    public function auth()
+    {
+        return new Api\Auth($this->httpClient);
+    }
+
+    /**
      * Manages data relating to the Chart of Accounts
      *
      * @param $account_id The account UUID
