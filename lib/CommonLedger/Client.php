@@ -23,4 +23,24 @@ class Client
         return new Api\Accounts($account_id, $this->httpClient);
     }
 
+    /**
+     * Collection of different tax rates and their codes
+     *
+     * @param $tax_id The tax UUID
+     */
+    public function tax($tax_id)
+    {
+        return new Api\Tax($tax_id, $this->httpClient);
+    }
+
+    /**
+     * Manages journal entries and journal lines
+     *
+     * @param $journal_id The journal entry UUID
+     */
+    public function journals($journal_id)
+    {
+        return new Api\Journals($journal_id, $this->httpClient);
+    }
+
 }

@@ -210,6 +210,116 @@ Deletes an account from the chart of accounts
 $response = $accounts->delete($options);
 ```
 
+### Tax api
+
+Collection of different tax rates and their codes
+
+The following arguments are required:
+
+ * __tax_id__: The tax UUID
+
+```php
+$tax = $client->tax("9136fee6-02da-426d-aa01-2b50c17b8a2f");
+```
+
+##### Add (POST /core.tax/add)
+
+Add a new tax rate
+
+The following arguments are required:
+
+ * __organisation_id__: The UUID of the organisation this tax rate belongs to
+ * __name__: The name of this tax rate
+ * __type__: The tax type (tax code)
+ * __display_rate__: The rate to display this tax at
+ * __effective_rate__: The rate that gets applied for this tax
+
+```php
+$response = $tax->add("863f2548-7284-11e3-9710-6163636f756e", "15% GST on Income", "OUTPUT2", 15, 15, $options);
+```
+
+##### View (GET /core.tax/view/:tax_id)
+
+View a tax rate
+
+
+
+```php
+$response = $tax->view($options);
+```
+
+##### Update (POST /core.tax/update/:tax_id)
+
+Update an existing tax rate
+
+The following arguments are required:
+
+ * __organisation_id__: The UUID of the organisation this tax rate belongs to
+ * __name__: The name of this tax rate
+ * __type__: The tax type (tax code)
+ * __display_rate__: The rate to display this tax at
+ * __effective_rate__: The rate that gets applied for this tax
+
+```php
+$response = $tax->update("863f2548-7284-11e3-9710-6163636f756e", "15% GST on Income", "OUTPUT2", 15, 15, $options);
+```
+
+### Journals api
+
+Manages journal entries and journal lines
+
+The following arguments are required:
+
+ * __journal_id__: The journal entry UUID
+
+```php
+$journals = $client->journals("76afff0a-7368-11e3-9c55-6a6f75726e61");
+```
+
+##### Add (POST /core.journal/add)
+
+Add a new journal entry
+
+The following arguments are required:
+
+ * __organisation_id__: The UUID of the organisation this journal entry belongs to
+ * __journal_number__: The journal number this journal entry belongs to
+ * __journal_type__: The type of journal entry this is
+ * __datetime__: The timestamp this journal entry was recorded
+ * __notes__: Any notes this journal entry has
+ * __lines__: An array of journal lines that make up this journal entry
+
+```php
+$response = $journals->add("863f2548-7284-11e3-9710-6163636f756e", "200", "", "2012-09-11T00:00:00+12:00", "Common Ledger is the best!", "...", $options);
+```
+
+##### View (GET /core.journal/view/:journal_id)
+
+View a journal entry
+
+
+
+```php
+$response = $journals->view($options);
+```
+
+##### Add (POST /core.journal/update/:journal_id)
+
+Add a new journal entry
+
+The following arguments are required:
+
+ * __organisation_id__: The UUID of the organisation this journal entry belongs to
+ * __journal_number__: The journal number this journal entry belongs to
+ * __journal_type__: The type of journal entry this is
+ * __datetime__: The timestamp this journal entry was recorded
+ * __notes__: Any notes this journal entry has
+ * __lines__: An array of journal lines that make up this journal entry
+
+```php
+$response = $journals->update("863f2548-7284-11e3-9710-6163636f756e", "200", "", "2012-09-11T00:00:00+12:00", "Common Ledger is the best!", "...", $options);
+```
+
 ## Contributors
 Here is a list of [Contributors]((https://github.org/commonledger/sdk-php/contributors)
 
