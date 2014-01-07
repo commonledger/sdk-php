@@ -6,7 +6,7 @@ use CommonLedger\HttpClient\HttpClient;
 
 class Client
 {
-    private $httpClient;
+    protected $httpClient;
 
     public function __construct($auth = array(), array $options = array())
     {
