@@ -13,7 +13,7 @@ Add the following to your composer.json
 ```js
 {
     "require": {
-        "commonledger/common-ledger-sdk": "*"
+        "commonledger/commonledger-sdk": "*"
     }
 }
 ```
