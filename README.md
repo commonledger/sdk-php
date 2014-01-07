@@ -182,6 +182,34 @@ $response = $accounts->add("863f2548-7284-11e3-9710-6163636f756e", "200", "Busin
 $response = $accounts->view($options);
 ```
 
+##### Update account (POST /core.account/update/:account_id)
+
+Updates an existing account in the chart of accounts
+
+The following arguments are required:
+
+ * __organisation_id__: The organisation the account belongs to
+ * __account_number__: The account code
+ * __name__: The account name
+ * __classification__: The account classification
+ * __type__: The type of classification for the account
+ * __tax__: The tax code that applies to the account
+ * __currency__: The currency code that applies to the account
+
+```php
+$response = $accounts->update("863f2548-7284-11e3-9710-6163636f756e", "200", "Business Tax Account 1", "ASSET", "BANK", "NONE", "NZD", $options);
+```
+
+##### Delete account (GET /core.account/delete/:account_id)
+
+Deletes an account from the chart of accounts
+
+
+
+```php
+$response = $accounts->delete($options);
+```
+
 ## Contributors
 Here is a list of [Contributors]((https://github.org/commonledger/sdk-php/contributors)
 

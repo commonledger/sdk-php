@@ -63,4 +63,46 @@ class Accounts
         return $response;
     }
 
+    /**
+     * Updates an existing account in the chart of accounts
+     * '/core.account/update/:account_id' POST
+     *
+     * @param $organisation_id The organisation the account belongs to
+     * @param $account_number The account code
+     * @param $name The account name
+     * @param $classification The account classification
+     * @param $type The type of classification for the account
+     * @param $tax The tax code that applies to the account
+     * @param $currency The currency code that applies to the account
+     */
+    public function update($organisation_id, $account_number, $name, $classification, $type, $tax, $currency, array $options = array())
+    {
+        $body = (isset($options['body']) ? $options['body'] : array());
+        $body['organisation_id'] = $organisation_id;
+        $body['account_number'] = $account_number;
+        $body['name'] = $name;
+        $body['classification'] = $classification;
+        $body['type'] = $type;
+        $body['tax'] = $tax;
+        $body['currency'] = $currency;
+
+        $response = $this->client->post('/core.account/update/'.rawurlencode($this->account_id).'', $body, $options);
+
+        return $response;
+    }
+
+    /**
+     * Deletes an account from the chart of accounts
+     * '/core.account/delete/:account_id' GET
+     *
+     */
+    public function delete(array $options = array())
+    {
+        $body = (isset($options['query']) ? $options['query'] : array());
+
+        $response = $this->client->get('/core.account/delete/'.rawurlencode($this->account_id).'', $body, $options);
+
+        return $response;
+    }
+
 }
