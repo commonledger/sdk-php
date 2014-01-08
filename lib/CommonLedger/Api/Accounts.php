@@ -33,16 +33,10 @@ class Accounts
      * @param $tax The tax code that applies to the account
      * @param $currency The currency code that applies to the account
      */
-    public function add($organisation_id, $account_number, $name, $classification, $type, $tax, $currency, array $options = array())
+    public function add(array $body, array $options = array())
     {
-        $body = (isset($options['body']) ? $options['body'] : array());
-        $body['organisation_id'] = $organisation_id;
-        $body['account_number'] = $account_number;
-        $body['name'] = $name;
-        $body['classification'] = $classification;
-        $body['type'] = $type;
-        $body['tax'] = $tax;
-        $body['currency'] = $currency;
+        if(isset($options['body']))
+            $body = array_merge($body, $options['body']);
 
         $response = $this->client->post('/core.account/add', $body, $options);
 
@@ -75,16 +69,10 @@ class Accounts
      * @param $tax The tax code that applies to the account
      * @param $currency The currency code that applies to the account
      */
-    public function update($organisation_id, $account_number, $name, $classification, $type, $tax, $currency, array $options = array())
+    public function update(array $body, array $options = array())
     {
-        $body = (isset($options['body']) ? $options['body'] : array());
-        $body['organisation_id'] = $organisation_id;
-        $body['account_number'] = $account_number;
-        $body['name'] = $name;
-        $body['classification'] = $classification;
-        $body['type'] = $type;
-        $body['tax'] = $tax;
-        $body['currency'] = $currency;
+        if(isset($options['body']))
+            $body = array_merge($body, $options['body']);
 
         $response = $this->client->post('/core.account/update/'.rawurlencode($this->account_id).'', $body, $options);
 

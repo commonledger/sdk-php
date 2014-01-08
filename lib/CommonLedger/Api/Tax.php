@@ -31,14 +31,10 @@ class Tax
      * @param $display_rate The rate to display this tax at
      * @param $effective_rate The rate that gets applied for this tax
      */
-    public function add($organisation_id, $name, $type, $display_rate, $effective_rate, array $options = array())
+    public function add(array $body, array $options = array())
     {
-        $body = (isset($options['body']) ? $options['body'] : array());
-        $body['organisation_id'] = $organisation_id;
-        $body['name'] = $name;
-        $body['type'] = $type;
-        $body['display_rate'] = $display_rate;
-        $body['effective_rate'] = $effective_rate;
+        if(isset($options['body']))
+            $body = array_merge($body, $options['body']);
 
         $response = $this->client->post('/core.tax/add', $body, $options);
 
@@ -69,14 +65,10 @@ class Tax
      * @param $display_rate The rate to display this tax at
      * @param $effective_rate The rate that gets applied for this tax
      */
-    public function update($organisation_id, $name, $type, $display_rate, $effective_rate, array $options = array())
+    public function update(array $body, array $options = array())
     {
-        $body = (isset($options['body']) ? $options['body'] : array());
-        $body['organisation_id'] = $organisation_id;
-        $body['name'] = $name;
-        $body['type'] = $type;
-        $body['display_rate'] = $display_rate;
-        $body['effective_rate'] = $effective_rate;
+        if(isset($options['body']))
+            $body = array_merge($body, $options['body']);
 
         $response = $this->client->post('/core.tax/update/'.rawurlencode($this->tax_id).'', $body, $options);
 

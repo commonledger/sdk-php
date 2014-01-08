@@ -32,15 +32,10 @@ class Journals
      * @param $notes Any notes this journal entry has
      * @param $lines An array of journal lines that make up this journal entry
      */
-    public function add($organisation_id, $journal_number, $journal_type, $datetime, $notes, $lines, array $options = array())
+    public function add(array $body, array $options = array())
     {
-        $body = (isset($options['body']) ? $options['body'] : array());
-        $body['organisation_id'] = $organisation_id;
-        $body['journal_number'] = $journal_number;
-        $body['journal_type'] = $journal_type;
-        $body['datetime'] = $datetime;
-        $body['notes'] = $notes;
-        $body['lines'] = $lines;
+        if(isset($options['body']))
+            $body = array_merge($body, $options['body']);
 
         $response = $this->client->post('/core.journal/add', $body, $options);
 
@@ -72,15 +67,10 @@ class Journals
      * @param $notes Any notes this journal entry has
      * @param $lines An array of journal lines that make up this journal entry
      */
-    public function update($organisation_id, $journal_number, $journal_type, $datetime, $notes, $lines, array $options = array())
+    public function update(array $body, array $options = array())
     {
-        $body = (isset($options['body']) ? $options['body'] : array());
-        $body['organisation_id'] = $organisation_id;
-        $body['journal_number'] = $journal_number;
-        $body['journal_type'] = $journal_type;
-        $body['datetime'] = $datetime;
-        $body['notes'] = $notes;
-        $body['lines'] = $lines;
+        if(isset($options['body']))
+            $body = array_merge($body, $options['body']);
 
         $response = $this->client->post('/core.journal/update/'.rawurlencode($this->journal_id).'', $body, $options);
 
