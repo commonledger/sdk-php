@@ -75,4 +75,19 @@ class Tax
         return $response;
     }
 
+    /**
+     * Synchronises a set of tax rates
+     * '/core.tax/sync' POST
+     *
+     */
+    public function sync(array $body, array $options = array())
+    {
+        if(isset($options['body']))
+            $body = array_merge($body, $options['body']);
+
+        $response = $this->client->post('/core.tax/sync', $body, $options);
+
+        return $response;
+    }
+
 }
