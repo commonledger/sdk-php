@@ -11,11 +11,27 @@ use CommonLedger\HttpClient\HttpClient;
 class Auth
 {
 
+    private $client_id;
+    private $client_secret;
     private $client;
 
-    public function __construct(HttpClient $client)
+    public function __construct($client_id, $client_secret, HttpClient $client)
     {
         $this->client = $client;
+        $this->client_id = $client_id;
+        $this->client_secret = $client_secret;
+    }
+
+    public function getAuthorizeUrl($state = ''){
+        $config = $this->client->client->getConfig();
+        $base_url = $config['base'] . '/' . $config['api_version'];
+        $params = array(
+            'scope' => 'connector',
+            'response_type' => 'code',
+            'client_id' => $this->client_id,
+            'state' => $state
+        );
+        return $base_url . '/auth/authorize?' . http_build_query($params);
     }
 
     /**
@@ -32,6 +48,12 @@ class Auth
     {
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
+
+        if(!isset($body['client_id']))
+            $body['client_id'] = $this->client_id;
+
+        if(!isset($body['client_secret']))
+            $body['client_secret'] = $this->client_secret;
 
         $response = $this->client->post('/auth/token', $body, $options);
 

@@ -77,4 +77,19 @@ class Journals
         return $response;
     }
 
+    /**
+     * Synchronises a set of journals and their lines
+     * '/core.account/sync' POST
+     *
+     */
+    public function sync(array $body, array $options = array())
+    {
+        if(isset($options['body']))
+            $body = array_merge($body, $options['body']);
+
+        $response = $this->client->post('/core.journal/sync', $body, $options);
+
+        return $response;
+    }
+
 }
