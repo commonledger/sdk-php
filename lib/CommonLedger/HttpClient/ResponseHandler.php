@@ -23,7 +23,7 @@ class ResponseHandler {
             }
 
             // might be an OAuth response, which isn't wrapped in the standard payload.
-            if(isset($body['access_token'])){
+            if(isset($body['access_token']) || isset($body['error'])){
                 return $body;
             }
             // otherwise, if it has a status property thats OK, its properly formed
@@ -33,7 +33,12 @@ class ResponseHandler {
             else {
                 $status = isset($body['status']) ? $body['status'] : 'UNKNOWN_ERROR';
                 $code = $response->getStatusCode();
-                throw new ClientException("Error in response: {$status}", $code, $response);
+
+                $message = "Error in response: {$status}";
+                if(isset($body['data']) && is_array($body['data']) && array_key_exists('message', $body['data']))
+                    $message = "{$status}: {$body['data']['message']}";
+
+                throw new ClientException($message, $code, $response);
             }
 
         }

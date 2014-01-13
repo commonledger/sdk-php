@@ -37,7 +37,11 @@ class ErrorHandler
             if ($response->isContentType('json') && is_array($body)) {
                 if (isset($body['status'])) {
                     $message = $body['status'];
-                } else {
+                }
+                else if (isset($body['error_description'])) { //oauth2
+                    $message = $body['error_description'];
+                }
+                else {
                     $message = 'Unable to select error message from json returned by request responsible for error';
                 }
             }
