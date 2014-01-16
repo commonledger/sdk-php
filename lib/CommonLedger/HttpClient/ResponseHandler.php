@@ -30,7 +30,8 @@ class ResponseHandler {
             else if(isset($body['status']) && $body['status'] === 'OK'){
                 return $body['data'];
             }
-            else {
+            // throw an exception if the data isn't in the format we expect (unsuccessful responses will be handled in the errorhandler
+            else if(!$response->isSuccessful()) {
                 $status = isset($body['status']) ? $body['status'] : 'UNKNOWN_ERROR';
                 $code = $response->getStatusCode();
 

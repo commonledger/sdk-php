@@ -35,6 +35,8 @@ class ErrorHandler
         if ($response->isContentType('json') && is_array($body)) {
             if (isset($body['status'])) {
                 $message = $body['status'];
+            } elseif(isset($body['error_description'])) {
+                $message = $body['error_description'];
             } elseif($response->isSuccessful()) {
                 $message = 'Error determining status from response payload';
             }
