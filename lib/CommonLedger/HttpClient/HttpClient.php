@@ -20,17 +20,15 @@ class HttpClient
     protected $options = array(
         'base'    => 'http://sandbox.api.commonledger.com',
         'api_version' => 'v1',
-        'user_agent' => 'alpaca/0.1.0 (https://github.com/pksunkara/alpaca)'
+        'user_agent' => 'commonledger-php-sdk/0.0.1 (https://github.com/commonledger/sdk-php)'
     );
 
     protected $headers = array();
 
-    public function __construct($auth = array(), array $options = array())
-    {
+    private $auth_handler;
+    private $error_handler;
 
-        if (gettype($auth) == 'string') {
-            $auth = array('access_token' => $auth);
-        }
+    public function __construct($access_token = null, array $options = array()) {
 
         $this->options = array_merge($this->options, $options);
 
@@ -43,16 +41,24 @@ class HttpClient
             unset($this->options['headers']);
         }
 
-        $client = new GuzzleClient($this->options['base'], $this->options);
+        $version = (isset($options['api_version']) ? "/".$options['api_version'] : "");
+        $base_url = $this->options['base'] . $version;
+
+        $client = new GuzzleClient($base_url, $this->options);
         $this->client  = $client;
 
-        $listener = array(new ErrorHandler(), 'onRequestError');
+        $this->error_handler = new ErrorHandler();
+        $listener = array($this->error_handler, 'onRequestError');
         $this->client->getEventDispatcher()->addListener('request.error', $listener);
 
-        if (!empty($auth)) {
-            $listener = array(new AuthHandler($auth), 'onRequestBeforeSend');
-            $this->client->getEventDispatcher()->addListener('request.before_send', $listener);
-        }
+        $this->auth_handler = new AuthHandler($access_token);
+        $listener = array($this->auth_handler, 'onRequestBeforeSend');
+        $this->client->getEventDispatcher()->addListener('request.before_send', $listener);
+
+    }
+
+    public function setAccessToken($access_token){
+        $this->auth_handler->setAccessToken($access_token);
     }
 
     public function get($path, array $params = array(), array $options = array())
@@ -129,10 +135,6 @@ class HttpClient
      */
     public function createRequest($httpMethod, $path, $body = null, array $headers = array(), array $options = array())
     {
-        $version = (isset($options['api_version']) ? "/".$options['api_version'] : "");
-
-        $path    = $version.$path;
-
         return $this->client->createRequest($httpMethod, $path, $headers, $body, $options);
     }
 

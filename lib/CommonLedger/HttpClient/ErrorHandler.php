@@ -3,6 +3,7 @@
 namespace CommonLedger\HttpClient;
 
 use Guzzle\Common\Event;
+use Guzzle\Http\Message\Request;
 use Guzzle\Http\Message\Response;
 
 use CommonLedger\HttpClient\ResponseHandler;
@@ -15,42 +16,34 @@ class ErrorHandler
 {
     public function onRequestError(Event $event)
     {
+        /** @var Request $request */
         $request = $event['request'];
         $response = $request->getResponse();
 
         $message = null;
         $code = $response->getStatusCode();
+        $status = $response->getReasonPhrase();
 
-        if ($response->isServerError()) {
-            throw new ClientException('Error '.$code, $code, $response);
+        $body = ResponseHandler::getBody($response);
+
+        // If HTML, whole body is taken
+        if (gettype($body) == 'string') {
+            $message = $body;
         }
 
-        if ($response->isClientError()) {
-            $body = ResponseHandler::getBody($response);
-
-            // If HTML, whole body is taken
-            if (gettype($body) == 'string') {
-                $message = $body;
+        // If JSON, a particular field is taken and used
+        if ($response->isContentType('json') && is_array($body)) {
+            if (isset($body['status'])) {
+                $message = $body['status'];
+            } elseif($response->isSuccessful()) {
+                $message = 'Error determining status from response payload';
             }
-
-            // If JSON, a particular field is taken and used
-            if ($response->isContentType('json') && is_array($body)) {
-                if (isset($body['status'])) {
-                    $message = $body['status'];
-                }
-                else if (isset($body['error_description'])) { //oauth2
-                    $message = $body['error_description'];
-                }
-                else {
-                    $message = 'Unable to select error message from json returned by request responsible for error';
-                }
-            }
-
-            if (empty($message)) {
-                $message = 'Unable to understand the content type of response returned by request responsible for error';
-            }
-
-            throw new ClientException($message, $code, $response);
         }
+
+        if (empty($message)) {
+            $message = "HTTP {$code}: {$status}";
+        }
+        throw new ClientException($message, $code, $response);
+
     }
 }

@@ -37,7 +37,7 @@ class Journals
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post('/core.journal/add', $body, $options);
+        $response = $this->client->post('core.journal/add', $body, $options);
 
         return $response;
     }
@@ -51,7 +51,7 @@ class Journals
     {
         $body = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get('/core.journal/view/'.rawurlencode($this->journal_id).'', $body, $options);
+        $response = $this->client->get('core.journal/view/'.rawurlencode($this->journal_id).'', $body, $options);
 
         return $response;
     }
@@ -72,7 +72,7 @@ class Journals
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post('/core.journal/update/'.rawurlencode($this->journal_id).'', $body, $options);
+        $response = $this->client->post('core.journal/update/'.rawurlencode($this->journal_id).'', $body, $options);
 
         return $response;
     }
@@ -87,7 +87,7 @@ class Journals
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post('/core.journal/sync', $body, $options);
+        $response = $this->client->post('core.journal/sync', $body, $options);
 
         return $response;
     }

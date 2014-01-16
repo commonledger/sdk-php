@@ -17,9 +17,9 @@ class Client
      * Using OAuth 2.0 to connect to Common Ledger
      *
      */
-    public function auth($client_id, $client_secret)
+    public function auth(array $oauth_params)
     {
-        return new Api\Auth($client_id, $client_secret, $this->httpClient);
+        return new Api\Auth($oauth_params, $this->httpClient);
     }
 
     /**

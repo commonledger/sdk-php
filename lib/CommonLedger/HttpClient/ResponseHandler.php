@@ -40,7 +40,6 @@ class ResponseHandler {
 
                 throw new ClientException($message, $code, $response);
             }
-
         }
 
         return $body;

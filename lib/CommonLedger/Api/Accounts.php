@@ -38,7 +38,7 @@ class Accounts
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post('/core.account/add', $body, $options);
+        $response = $this->client->post('core.account/add', $body, $options);
 
         return $response;
     }
@@ -52,7 +52,7 @@ class Accounts
     {
         $body = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get('/core.account/view/'.rawurlencode($this->account_id).'', $body, $options);
+        $response = $this->client->get('core.account/view/'.rawurlencode($this->account_id).'', $body, $options);
 
         return $response;
     }
@@ -74,7 +74,7 @@ class Accounts
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post('/core.account/update/'.rawurlencode($this->account_id).'', $body, $options);
+        $response = $this->client->post('core.account/update/'.rawurlencode($this->account_id).'', $body, $options);
 
         return $response;
     }
@@ -88,7 +88,7 @@ class Accounts
     {
         $body = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get('/core.account/delete/'.rawurlencode($this->account_id).'', $body, $options);
+        $response = $this->client->get('core.account/delete/'.rawurlencode($this->account_id).'', $body, $options);
 
         return $response;
     }
@@ -103,7 +103,7 @@ class Accounts
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post('/core.account/sync', $body, $options);
+        $response = $this->client->post('core.account/sync', $body, $options);
 
         return $response;
     }

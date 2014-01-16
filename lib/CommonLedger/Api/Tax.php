@@ -36,7 +36,7 @@ class Tax
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post('/core.tax/add', $body, $options);
+        $response = $this->client->post('core.tax/add', $body, $options);
 
         return $response;
     }
@@ -50,7 +50,7 @@ class Tax
     {
         $body = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get('/core.tax/view/'.rawurlencode($this->tax_id).'', $body, $options);
+        $response = $this->client->get('core.tax/view/'.rawurlencode($this->tax_id).'', $body, $options);
 
         return $response;
     }
@@ -70,7 +70,7 @@ class Tax
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post('/core.tax/update/'.rawurlencode($this->tax_id).'', $body, $options);
+        $response = $this->client->post('core.tax/update/'.rawurlencode($this->tax_id).'', $body, $options);
 
         return $response;
     }
@@ -85,7 +85,7 @@ class Tax
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post('/core.tax/sync', $body, $options);
+        $response = $this->client->post('core.tax/sync', $body, $options);
 
         return $response;
     }
