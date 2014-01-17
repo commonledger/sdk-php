@@ -24,20 +24,25 @@ class Auth {
     /**
      * Build the URL to redirect the user to to begin the OAuth 2.0 flow.
      *
-     * @param string  $state         An optional state parameter that will be returned
-     *                               when the authorization is complete
-     * @param array   $organization  An associative array of organization properties
-     *                               that can be used to set-up a new organization for the user
+     * @param string $state An optional state parameter that will be returned
+     * when the authorization is complete
+     * @param array $organization An associative array of organization properties
+     * that can be used to set-up a new organization for the user
+     * @param mixed $context A value passed by Common Ledger when starting to authorize
+     * (used when authorization is initiated by Common Ledger)
      *
      * @return string
      */
-    public function getAccessCodeUrl($state = null, $organization = array()){
+    public function getAccessCodeUrl($state = null, $organization = array(), $context = null){
         $params = array(
             'client_id' => $this->oauth_params['client_id'],
             'response_type' => 'code',
             'scope' => $this->oauth_params['scope'],
             'state' => $state
         );
+
+        if($context !== null)
+            $params['context'] = $context;
 
         if(!empty($organization))
             $params['org'] = base64_encode(json_encode($organization));
