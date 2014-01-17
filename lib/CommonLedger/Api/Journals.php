@@ -2,6 +2,7 @@
 
 namespace CommonLedger\Api;
 
+use CommonLedger\Exception\ClientException;
 use CommonLedger\HttpClient\HttpClient;
 
 /**

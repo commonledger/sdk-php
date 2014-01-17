@@ -12,6 +12,7 @@ class ResponseHandler {
 
     public static function getBody(GuzzleResponse $response)
     {
+        $code = $response->getStatusCode();
         $body = $response->getBody(true);
 
         // Response body is in JSON
@@ -19,7 +20,7 @@ class ResponseHandler {
             $body = json_decode($body, true);
 
             if (JSON_ERROR_NONE !== json_last_error() || !is_array($body)) {
-                throw new ClientException("Malformed JSON response from Common Ledger API", 500);
+                throw new ClientException("Malformed JSON response from Common Ledger API ({$code}) {$body}", 500, $response);
             }
 
             // might be an OAuth response, which isn't wrapped in the standard payload.
@@ -31,9 +32,8 @@ class ResponseHandler {
                 return $body['data'];
             }
             // throw an exception if the data isn't in the format we expect (unsuccessful responses will be handled in the errorhandler
-            else if(!$response->isSuccessful()) {
+            else if($response->isSuccessful()) {
                 $status = isset($body['status']) ? $body['status'] : 'UNKNOWN_ERROR';
-                $code = $response->getStatusCode();
 
                 $message = "Error in response: {$status}";
                 if(isset($body['data']) && is_array($body['data']) && array_key_exists('message', $body['data']))
@@ -41,6 +41,9 @@ class ResponseHandler {
 
                 throw new ClientException($message, $code, $response);
             }
+        }
+        else if($response->isSuccessful()){
+            throw new ClientException("Malformed response from Common Ledger API: ({$code}) {$body}", 500, $response);
         }
 
         return $body;
