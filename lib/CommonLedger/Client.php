@@ -14,8 +14,20 @@ class Client
     }
 
     /**
-     * Using OAuth 2.0 to connect to Common Ledger
+     * Set the access token to use when making requests.
      *
+     * @param string $access_token
+     */
+    public function setAccessToken($access_token)
+    {
+        $this->httpClient->setAccessToken($access_token);
+    }
+
+    /**
+     * Get and refresh OAuth 2.0 access tokens
+     *
+     * @param array $oauth_params The parameters required to connect to the OAuth endpoints
+     * @return \CommonLedger\Api\Auth
      */
     public function auth(array $oauth_params)
     {
@@ -25,7 +37,8 @@ class Client
     /**
      * Manages data relating to the Chart of Accounts
      *
-     * @param $account_id The account UUID
+     * @param string $account_id The account UUID
+     * @return \CommonLedger\Api\Accounts
      */
     public function accounts($account_id)
     {
@@ -35,7 +48,7 @@ class Client
     /**
      * Collection of different tax rates and their codes
      *
-     * @param $tax_id The tax UUID
+     * @param string $tax_id The tax UUID
      */
     public function tax($tax_id)
     {
@@ -45,7 +58,7 @@ class Client
     /**
      * Manages journal entries and journal lines
      *
-     * @param $journal_id The journal entry UUID
+     * @param string $journal_id The journal entry UUID
      */
     public function journals($journal_id)
     {

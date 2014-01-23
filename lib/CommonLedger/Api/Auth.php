@@ -18,6 +18,13 @@ class Auth {
 
     public function __construct(array $oauth_params, HttpClient $client) {
         $this->client = $client;
+
+        $required_args = array('client_id', 'client_secret', 'redirect_uri', 'scope');
+        foreach($required_args as $key){
+            if(!array_key_exists($key, $oauth_params))
+                throw new \InvalidArgumentException("A {$key} is required in OAuth parameters");
+        }
+
         $this->oauth_params = $oauth_params;
     }
 
@@ -92,7 +99,7 @@ class Auth {
 
     private function oAuthRequest(array $params, array $options = array()){
 
-        $url = $this->oauth_params['base'] . '/v1/authorize';
+        $url = $this->oauth_params['base'] . '/token';
         try {
             $response = $this->client->post($url, $params, $options);
         }
