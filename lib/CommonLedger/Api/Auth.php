@@ -54,7 +54,7 @@ class Auth {
         if(!empty($organization))
             $params['org'] = base64_encode(json_encode($organization));
 
-        return sprintf('%s/authorize?%s', $this->oauth_params['base'], http_build_query($params));
+        return sprintf('%s/auth?%s', $this->oauth_params['base'], http_build_query($params));
     }
 
     /**

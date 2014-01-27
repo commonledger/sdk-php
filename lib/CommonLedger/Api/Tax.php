@@ -25,11 +25,6 @@ class Tax
      * Add a new tax rate
      * '/core.tax/add' POST
      *
-     * @param $organisation_id The UUID of the organisation this tax rate belongs to
-     * @param $name The name of this tax rate
-     * @param $type The tax type (tax code)
-     * @param $display_rate The rate to display this tax at
-     * @param $effective_rate The rate that gets applied for this tax
      */
     public function add(array $body, array $options = array())
     {
@@ -59,11 +54,6 @@ class Tax
      * Update an existing tax rate
      * '/core.tax/update/:tax_id' POST
      *
-     * @param $organisation_id The UUID of the organisation this tax rate belongs to
-     * @param $name The name of this tax rate
-     * @param $type The tax type (tax code)
-     * @param $display_rate The rate to display this tax at
-     * @param $effective_rate The rate that gets applied for this tax
      */
     public function update(array $body, array $options = array())
     {

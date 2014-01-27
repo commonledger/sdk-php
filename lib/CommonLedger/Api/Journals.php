@@ -26,12 +26,6 @@ class Journals
      * Add a new journal entry
      * '/core.journal/add' POST
      *
-     * @param $organisation_id The UUID of the organisation this journal entry belongs to
-     * @param $journal_number The journal number this journal entry belongs to
-     * @param $journal_type The type of journal entry this is
-     * @param $datetime The timestamp this journal entry was recorded
-     * @param $notes Any notes this journal entry has
-     * @param $lines An array of journal lines that make up this journal entry
      */
     public function add(array $body, array $options = array())
     {
@@ -61,12 +55,6 @@ class Journals
      * Add a new journal entry
      * '/core.journal/update/:journal_id' POST
      *
-     * @param $organisation_id The UUID of the organisation this journal entry belongs to
-     * @param $journal_number The journal number this journal entry belongs to
-     * @param $journal_type The type of journal entry this is
-     * @param $datetime The timestamp this journal entry was recorded
-     * @param $notes Any notes this journal entry has
-     * @param $lines An array of journal lines that make up this journal entry
      */
     public function update(array $body, array $options = array())
     {

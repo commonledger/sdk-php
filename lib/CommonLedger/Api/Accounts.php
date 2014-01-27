@@ -25,13 +25,6 @@ class Accounts
      * Creates a new account in the chart of accounts
      * '/core.account/add' POST
      *
-     * @param $organisation_id The organisation the account belongs to
-     * @param $account_number The account code
-     * @param $name The account name
-     * @param $classification The account classification
-     * @param $type The type of classification for the account
-     * @param $tax The tax code that applies to the account
-     * @param $currency The currency code that applies to the account
      */
     public function add(array $body, array $options = array())
     {
@@ -44,7 +37,7 @@ class Accounts
     }
 
     /**
-     * 
+     * Get an account from the chart of accounts
      * '/core.account/view/:account_id' GET
      *
      */
@@ -61,13 +54,6 @@ class Accounts
      * Updates an existing account in the chart of accounts
      * '/core.account/update/:account_id' POST
      *
-     * @param $organisation_id The organisation the account belongs to
-     * @param $account_number The account code
-     * @param $name The account name
-     * @param $classification The account classification
-     * @param $type The type of classification for the account
-     * @param $tax The tax code that applies to the account
-     * @param $currency The currency code that applies to the account
      */
     public function update(array $body, array $options = array())
     {

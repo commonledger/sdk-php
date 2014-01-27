@@ -4,19 +4,19 @@ namespace CommonLedger\Api;
 
 use CommonLedger\HttpClient\HttpClient;
 
-class Organisations
+class Organizations
 {
 
     private $client;
 
-    public function __construct($organisation_id, HttpClient $client)
+    public function __construct($organization_id, HttpClient $client)
     {
-        $this->organisation_id = $organisation_id;
+        $this->organization_id = $organization_id;
         $this->client = $client;
     }
 
-    public function setOrganisationId($organisation_id){
-        $this->organisation_id = $organisation_id;
+    public function setOrganizationId($organization_id){
+        $this->organization_id = $organization_id;
     }
 
     public function add(array $body, array $options = array())
@@ -24,7 +24,7 @@ class Organisations
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post('core.organisation/add', $body, $options);
+        $response = $this->client->post('core.organization/add', $body, $options);
 
         return $response;
     }
@@ -33,7 +33,7 @@ class Organisations
     {
         $body = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get('core.organisation/view/'.rawurlencode($this->organisation_id).'', $body, $options);
+        $response = $this->client->get('core.organization/view/'.rawurlencode($this->organization_id).'', $body, $options);
 
         return $response;
     }
@@ -44,7 +44,7 @@ class Organisations
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post('core.organisation/update/'.rawurlencode($this->organisation_id).'', $body, $options);
+        $response = $this->client->post('core.organization/update/'.rawurlencode($this->organization_id).'', $body, $options);
 
         return $response;
     }
