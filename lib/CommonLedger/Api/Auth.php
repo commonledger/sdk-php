@@ -43,6 +43,7 @@ class Auth {
     public function getAccessCodeUrl($state = null, $organization = array(), $context = null){
         $params = array(
             'client_id' => $this->oauth_params['client_id'],
+            'redirect_uri'	 =>	$this->oauth_params['redirect_uri'],
             'response_type' => 'code',
             'scope' => $this->oauth_params['scope'],
             'state' => $state
