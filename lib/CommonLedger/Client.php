@@ -13,10 +13,6 @@ class Client
         $this->httpClient = new HttpClient($access_token, $options);
     }
 
-    public function setAccessToken($access_token = null){
-        $this->httpClient->setAccessToken($access_token);
-    }
-
     /**
      * Set the access token to use when making requests.
      *
