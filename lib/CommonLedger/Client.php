@@ -8,9 +8,13 @@ class Client
 {
     protected $httpClient;
 
-    public function __construct($auth = array(), array $options = array())
+    public function __construct($access_token = null, array $options = array())
     {
-        $this->httpClient = new HttpClient($auth, $options);
+        $this->httpClient = new HttpClient($access_token, $options);
+    }
+
+    public function setAccessToken($access_token = null){
+        $this->httpClient->setAccessToken($access_token);
     }
 
     /**
