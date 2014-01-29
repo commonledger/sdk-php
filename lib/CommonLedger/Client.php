@@ -65,4 +65,14 @@ class Client
         return new Api\Journals($journal_id, $this->httpClient);
     }
 
+    /**
+     * Manages organizations
+     *
+     * @param string $journal_id The organization UUID
+     */
+    public function organizations($organization_id)
+    {
+        return new Api\Organizations($organization_id, $this->httpClient);
+    }
+
 }
