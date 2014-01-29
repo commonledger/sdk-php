@@ -12,7 +12,9 @@ use CommonLedger\HttpClient\HttpClient;
  */
 class Auth {
 
-    private $oauth_params = array();
+    private $oauth_params = array(
+        'base' => 'https://login.commonledger.com'
+    );
 
     private $client;
 
@@ -25,7 +27,7 @@ class Auth {
                 throw new \InvalidArgumentException("A {$key} is required in OAuth parameters");
         }
 
-        $this->oauth_params = $oauth_params;
+        $this->oauth_params = array_merge($this->oauth_params, $oauth_params);
     }
 
     /**
@@ -56,6 +58,23 @@ class Auth {
             $params['org'] = base64_encode(json_encode($organization));
 
         return sprintf('%s/auth?%s', $this->oauth_params['base'], http_build_query($params));
+    }
+
+    /**
+     * Build a URL that will log the user out of their Common Ledger session.
+     *
+     * @param string $redirect_uri The URL to redirect to when the user has logged out.
+     *               Must be on the same domain as the redirect_domain configured in the app settings
+     * @return string
+     */
+    public function getLogoutUrl($redirect_uri = null){
+
+        $params = array(
+            'client_id' => $this->oauth_params['client_id'],
+            'redirect_uri' => $redirect_uri
+        );
+
+        return sprintf('%s/logout?%s', $this->oauth_params['base'], http_build_query($params));
     }
 
     /**
