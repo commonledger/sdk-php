@@ -75,4 +75,14 @@ class Client
         return new Api\Organizations($organization_id, $this->httpClient);
     }
 
+    /**
+     * Manage users
+     *
+     * @param string $user_id The user UUID
+     */
+    public function users($user_id)
+    {
+        return new Api\Users($user_id, $this->httpClient);
+    }
+
 }

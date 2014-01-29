@@ -18,7 +18,7 @@ use CommonLedger\HttpClient\ResponseHandler;
 class HttpClient
 {
     protected $options = array(
-        'base'    => 'http://sandbox.api.commonledger.com',
+        'base'    => 'https://api.commonledger.com',
         'api_version' => 'v1',
         'user_agent' => 'commonledger-php-sdk/0.0.1 (https://github.com/commonledger/sdk-php)'
     );
@@ -41,7 +41,7 @@ class HttpClient
             unset($this->options['headers']);
         }
 
-        $version = (isset($options['api_version']) ? "/".$options['api_version'] : "");
+        $version = (isset($this->options['api_version']) ? "/".$this->options['api_version'] : "");
         $base_url = $this->options['base'] . $version;
 
         $client = new GuzzleClient($base_url, $this->options);
