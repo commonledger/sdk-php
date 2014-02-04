@@ -119,6 +119,11 @@ class Auth {
 
     private function oAuthRequest(array $params, array $options = array()){
 
+        if(isset($options['params']) && is_array($options['params'])){
+            $params = array_merge($params, $options['params']);
+            unset($options['params']);
+        }
+
         $url = $this->oauth_params['base'] . '/token';
         try {
             $response = $this->client->post($url, $params, $options);
