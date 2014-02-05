@@ -84,5 +84,16 @@ class Client
     {
         return new Api\Users($user_id, $this->httpClient);
     }
+    
+    /**
+     * Send unhandled API call
+
+     */
+    public function api()
+    {
+    	return $this->httpClient;
+    }
+    
+    
 
 }
