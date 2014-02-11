@@ -80,4 +80,17 @@ class Tax
         return $response;
     }
 
+    /**
+     * Get the number of accounts for an organization. Defaults to current organization_id,
+     * unless specified in the query
+     */
+    public function count(array $options = array())
+    {
+        $body = (isset($options['query']) ? $options['query'] : array());
+
+        $response = $this->client->get('tax/count', $body, $options);
+
+        return $response;
+    }
+
 }

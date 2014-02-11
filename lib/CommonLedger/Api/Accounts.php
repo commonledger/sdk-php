@@ -23,7 +23,6 @@ class Accounts
 
     /**
      * Creates a new account in the chart of accounts
-     * '/core.account/add' POST
      *
      */
     public function add(array $body, array $options = array())
@@ -38,7 +37,6 @@ class Accounts
 
     /**
      * Synchronises a set of accounts
-     * '/core.account/sync' POST
      *
      */
     public function sync(array $body, array $options = array())
@@ -67,7 +65,6 @@ class Accounts
 
     /**
      * Updates an existing account in the chart of accounts
-     * '/core.account/update/:account_id' POST
      *
      */
     public function update(array $body, array $options = array())
@@ -82,7 +79,6 @@ class Accounts
 
     /**
      * Deletes an account from the chart of accounts
-     * '/core.account/delete/:account_id' GET
      *
      */
     public function delete(array $options = array())
@@ -90,6 +86,19 @@ class Accounts
         $body = (isset($options['body']) ? $options['body'] : array());
 
         $response = $this->client->delete('account/'.rawurlencode($this->account_id), $body, $options);
+
+        return $response;
+    }
+
+    /**
+     * Get the number of accounts for an organization. Defaults to current organization_id,
+     * unless specified in the query
+     */
+    public function count(array $options = array())
+    {
+        $body = (isset($options['query']) ? $options['query'] : array());
+
+        $response = $this->client->get('account/count', $body, $options);
 
         return $response;
     }

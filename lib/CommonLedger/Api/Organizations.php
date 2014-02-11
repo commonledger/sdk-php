@@ -54,5 +54,14 @@ class Organizations
         return $response;
     }
 
+    public function addons(array $options = array())
+    {
+        $query = (isset($options['query']) ? $options['query'] : array());
+
+        $response = $this->client->get('organization/'.rawurlencode($this->organization_id).'/addons', $query, $options);
+
+        return $response;
+    }
+
 
 }
