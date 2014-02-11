@@ -52,7 +52,7 @@ class Auth {
         );
 
         if($context !== null)
-            $params['context'] = $context;
+            $params['context'] = base64_encode(json_encode($context));
 
         if(!empty($organization))
             $params['org'] = base64_encode(json_encode($organization));
