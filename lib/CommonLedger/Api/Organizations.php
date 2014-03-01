@@ -63,5 +63,14 @@ class Organizations
         return $response;
     }
 
+    public function accounts(array $options = array())
+    {
+        $query = (isset($options['query']) ? $options['query'] : array());
+
+        $response = $this->client->get('organization/'.rawurlencode($this->organization_id).'/accounts', $query, $options);
+
+        return $response;
+    }
+
 
 }
