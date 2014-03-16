@@ -7,8 +7,9 @@ namespace CommonLedger\HttpClient;
  */
 class Response
 {
-    function __construct($body, $code, $headers) {
+    function __construct($body, $pagination, $code, $headers) {
         $this->body = $body;
+        $this->pagination = $pagination;
         $this->code = $code;
         $this->headers = $headers;
     }

@@ -23,8 +23,34 @@ class Journals
     }
 
     /**
+     * Get a list of all journals
+     * '/journal' GET
+     */
+    public function index(array $query = array(), array $options = array())
+    {
+        if(isset($options['query'])){
+            $query = array_merge($query, $options['query']);
+            unset($options['query']);
+        }
+
+        $response = $this->client->get('journal', $query, $options);
+
+        return $response;
+    }
+
+    /**
+     * Convenience method for searching journals
+     * '/journal' GET
+     */
+    public function search($term, array $pagination = array(), array $options = array())
+    {
+        $params = array_merge($pagination, array('word' => $term));
+        return $this->index($params, $options);
+    }
+
+    /**
      * Add a new journal entry
-     * '/core.journal/add' POST
+     * '/journal/add' POST
      *
      */
     public function add(array $body, array $options = array())
@@ -39,7 +65,7 @@ class Journals
 
     /**
      * Synchronises a set of journals and their lines
-     * '/core.account/sync' POST
+     * '/journal/sync' POST
      *
      */
     public function sync(array $body, array $options = array())
@@ -54,7 +80,7 @@ class Journals
 
     /**
      * View a journal entry
-     * '/core.journal/view/:journal_id' GET
+     * '/journal/view/:journal_id' GET
      *
      */
     public function view(array $options = array())
@@ -68,7 +94,7 @@ class Journals
 
     /**
      * Add a new journal entry
-     * '/core.journal/update/:journal_id' POST
+     * '/journal/update/:journal_id' POST
      *
      */
     public function update(array $body, array $options = array())

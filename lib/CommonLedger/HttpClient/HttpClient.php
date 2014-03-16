@@ -125,7 +125,10 @@ class HttpClient
             throw new \RuntimeException($e->getMessage());
         }
 
-        return new Response($this->getBody($response), $response->getStatusCode(), $response->getHeaders());
+        $body = $this->getBody($response);
+        $pagination = isset($body['pagination']) ? $body['pagination']: array();
+
+        return new Response($body['data'], $pagination, $response->getStatusCode(), $response->getHeaders());
     }
 
     /**

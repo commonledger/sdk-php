@@ -25,11 +25,11 @@ class ResponseHandler {
 
             // might be an OAuth response, which isn't wrapped in the standard payload.
             if(isset($body['access_token']) || isset($body['error'])){
-                return $body;
+                return array('data' => $body);
             }
             // otherwise, if it has a status property thats OK, its properly formed
             else if(isset($body['status']) && $body['status'] === 'OK'){
-                return $body['data'];
+                return $body;
             }
             // throw an exception if the data isn't in the format we expect (unsuccessful responses will be handled in the errorhandler
             else if($response->isSuccessful()) {
