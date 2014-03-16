@@ -2,11 +2,10 @@
 
 namespace CommonLedger\HttpClient;
 
+use CommonLedger\Exception\OAuthException;
 use Guzzle\Common\Event;
 use Guzzle\Http\Message\Request;
-use Guzzle\Http\Message\Response;
 
-use CommonLedger\HttpClient\ResponseHandler;
 use CommonLedger\Exception\ClientException;
 
 /**
@@ -36,7 +35,16 @@ class ErrorHandler
             if (isset($body['status'])) {
                 $message = $body['status'];
             } elseif(isset($body['error_description'])) {
-                $message = $body['error_description'];
+                // OAuth errors have an error_description, so throw an OAuthException
+
+                $oauth_params = array();
+                if($request->hasHeader('Authorization')){
+                    $auth_header = $request->getHeaders()->get('Authorization')->toArray();
+                    list(,$access_token) = explode(' ', $auth_header[0]);
+                    $oauth_params['access_token'] = $access_token;
+                }
+
+                throw new OAuthException($body['error_description'], $code, $oauth_params);
             } elseif($response->isSuccessful()) {
                 $message = 'Error determining status from response payload';
             }
