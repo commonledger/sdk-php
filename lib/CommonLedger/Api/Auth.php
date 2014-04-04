@@ -35,14 +35,10 @@ class Auth {
      *
      * @param string $state An optional state parameter that will be returned
      * when the authorization is complete
-     * @param array $organization An associative array of organization properties
-     * that can be used to set-up a new organization for the user
-     * @param mixed $context A value passed by Common Ledger when starting to authorize
-     * (used when authorization is initiated by Common Ledger)
      *
      * @return string
      */
-    public function getAccessCodeUrl($state = null, $organization = array(), $context = null){
+    public function getAccessCodeUrl($state = null){
         $params = array(
             'client_id' => $this->oauth_params['client_id'],
             'redirect_uri'	 =>	$this->oauth_params['redirect_uri'],
@@ -50,12 +46,6 @@ class Auth {
             'scope' => $this->oauth_params['scope'],
             'state' => $state
         );
-
-        if($context !== null)
-            $params['context'] = base64_encode(json_encode($context));
-
-        if(!empty($organization))
-            $params['org'] = base64_encode(json_encode($organization));
 
         return sprintf('%s/auth?%s', $this->oauth_params['base'], http_build_query($params));
     }
