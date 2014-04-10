@@ -135,7 +135,7 @@ _endpoint documentation tbc_
 
 
 ## Contributors
-Here is a list of [Contributors]((https://github.org/commonledger/sdk-php/contributors)
+Here is a list of [Contributors](https://github.org/commonledger/sdk-php/contributors)
 
 
 ## Bug Reports
