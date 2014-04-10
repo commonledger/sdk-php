@@ -68,6 +68,19 @@ class Auth {
     }
 
     /**
+     *
+     */
+    public function getConnectUrl($redirect_uri, $context){
+        $params = array(
+            'client_id' => $this->oauth_params['client_id'],
+            'redirect_uri' => $redirect_uri,
+            'context' => $context
+        );
+
+        return sprintf('%s/connect?%s', $this->oauth_params['base'], http_build_query($params));
+    }
+
+    /**
      * Get an access token from an OAuth 2.0 access code (obtained after the authorize redirect)
      *
      * @param string $access_code  Access token from the authorize response
