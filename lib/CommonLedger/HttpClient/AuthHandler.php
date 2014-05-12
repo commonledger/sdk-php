@@ -22,7 +22,7 @@ class AuthHandler
         $request = $event['request'];
 
         if($this->access_token !== null){
-            $request->addHeader('Authorization', "Bearer {$this->access_token}");
+            $request->setHeader('Authorization', "Bearer {$this->access_token}");
         }
 
     }
