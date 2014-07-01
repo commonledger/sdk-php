@@ -1,7 +1,7 @@
 <?php
 
 
-namespace CommonLedger\Exception;
+namespace CommonLedger\Sdk\Exception;
 
 use Exception;
 

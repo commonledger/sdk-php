@@ -1,6 +1,6 @@
 <?php
 
-namespace CommonLedger\Exception;
+namespace CommonLedger\Sdk\Exception;
 
 use Guzzle\Http\Message\Response as GuzzleResponse;
 

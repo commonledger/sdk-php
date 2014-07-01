@@ -1,6 +1,6 @@
 <?php
 
-namespace CommonLedger\HttpClient;
+namespace CommonLedger\Sdk\HttpClient;
 
 /*
  * Response object contains the response returned by the client

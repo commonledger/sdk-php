@@ -1,6 +1,6 @@
 <?php
 
-namespace CommonLedger\HttpClient;
+namespace CommonLedger\Sdk\HttpClient;
 
 use Guzzle\Http\Message\RequestInterface;
 

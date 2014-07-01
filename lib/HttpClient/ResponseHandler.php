@@ -1,8 +1,8 @@
 <?php
 
-namespace CommonLedger\HttpClient;
+namespace CommonLedger\Sdk\HttpClient;
 
-use CommonLedger\Exception\ClientException;
+use CommonLedger\Sdk\Exception\ClientException;
 use Guzzle\Http\Message\Response as GuzzleResponse;
 
 /**
