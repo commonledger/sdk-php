@@ -147,4 +147,24 @@ class Tax extends AbstractEndpoint
         return $response;
     }
 
+
+    /**
+     * GET /ledger/{ledger_id}/chart/{chart_id}/tax/count
+     *
+     * Get a count of the current number of Taxes for the current Chart
+     *
+     * @param array $options Optional arguments to pass to pass to the request
+     *
+     * @return \CommonLedger\Sdk\HttpClient\Response
+     */
+    public function count(array $options = array())
+    {
+        if(isset($options['body']))
+            $body = array_merge($body, $options['body']);
+
+        $response = $this->client->post($this->endpoint, $body, $options);
+
+        return $response;
+    }    
+
 }

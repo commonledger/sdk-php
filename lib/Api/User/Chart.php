@@ -128,6 +128,25 @@ class Chart extends AbstractEndpoint
     }
 
     /**
+     * GET /user/{user_id}/chart/count
+     *
+     * Get a count of the current number of Charts for the current User
+     *
+     * @param array $options Optional arguments to pass to pass to the request
+     *
+     * @return \CommonLedger\Sdk\HttpClient\Response
+     */
+    public function count(array $options = array())
+    {
+        if(isset($options['body']))
+            $body = array_merge($body, $options['body']);
+
+        $response = $this->client->post($this->endpoint, $body, $options);
+
+        return $response;
+    }   
+
+    /**
      * Get the account endpoint of a Chart
      *
      * @param string $chart_id The Chart UUID for the account endpoint
