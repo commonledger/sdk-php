@@ -158,7 +158,7 @@ class Journal extends AbstractEndpoint
      */
     public function count(array $options = array())
     {
-        $response = $this->client->get($this->endpoint, $options);
+        $response = $this->client->get($this->endpoint . '/count', $options);
 
         return $response;
     }      
