@@ -1,16 +1,16 @@
 <?php
 
-namespace CommonLedger\HttpClient;
+namespace CommonLedger\Sdk\HttpClient;
 
 use Guzzle\Http\Client as GuzzleClient;
 use Guzzle\Http\ClientInterface;
 use Guzzle\Http\Message\RequestInterface;
 
-use CommonLedger\HttpClient\AuthHandler;
-use CommonLedger\HttpClient\ErrorHandler;
-use CommonLedger\HttpClient\RequestHandler;
-use CommonLedger\HttpClient\Response;
-use CommonLedger\HttpClient\ResponseHandler;
+use CommonLedger\Sdk\HttpClient\AuthHandler;
+use CommonLedger\Sdk\HttpClient\ErrorHandler;
+use CommonLedger\Sdk\HttpClient\RequestHandler;
+use CommonLedger\Sdk\HttpClient\Response;
+use CommonLedger\Sdk\HttpClient\ResponseHandler;
 
 /**
  * Main HttpClient which is used by Api classes

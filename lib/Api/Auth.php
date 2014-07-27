@@ -1,10 +1,10 @@
 <?php
 
-namespace CommonLedger\Api;
+namespace CommonLedger\Sdk\Api;
 
-use CommonLedger\Exception\ClientException;
-use CommonLedger\Exception\OAuthException;
-use CommonLedger\HttpClient\HttpClient;
+use CommonLedger\Sdk\Exception\ClientException;
+use CommonLedger\Sdk\Exception\OAuthException;
+use CommonLedger\Sdk\HttpClient\HttpClient;
 
 /**
  * Using OAuth 2.0 to connect to Common Ledger
@@ -35,14 +35,15 @@ class Auth {
      *
      * @param string $state An optional state parameter that will be returned
      * when the authorization is complete
+     * @param string $response_type The type of response, defaults to `code`
      *
      * @return string
      */
-    public function getAccessCodeUrl($state = null){
+    public function getAccessCodeUrl($state = null, $response_type = 'code'){
         $params = array(
             'client_id' => $this->oauth_params['client_id'],
             'redirect_uri'	 =>	$this->oauth_params['redirect_uri'],
-            'response_type' => 'code',
+            'response_type' => $response_type,
             'scope' => $this->oauth_params['scope'],
             'state' => $state
         );
@@ -68,7 +69,7 @@ class Auth {
     }
 
     /**
-     *
+     * Build a URL that can be used to connect a new connector to a Ledger
      */
     public function getConnectUrl($redirect_uri, $context){
         $params = array(
@@ -89,14 +90,20 @@ class Auth {
      */
     public function accessToken($access_code, array $options = array()){
 
-        $params = array(
+        $params = array();
+        if(isset($options['oauth_params'])){
+            $params = $options['oauth_params'];
+            unset($options['oauth_params']);
+        }
+
+        $params = array_merge(array(
             'client_id'      => $this->oauth_params['client_id'],
             'client_secret'	 =>	$this->oauth_params['client_secret'],
             'scope'			 =>	$this->oauth_params['scope'],
             'code'			 =>	$access_code,
             'redirect_uri'	 =>	$this->oauth_params['redirect_uri'],
             'grant_type'	 =>	'authorization_code',
-        );
+        ), $params);
 
         return $this->oAuthRequest($params, $options);
     }
@@ -110,12 +117,18 @@ class Auth {
      */
     public function refreshAccessToken($refresh_token, array $options = array()) {
 
-        $params = array(
+        $params = array();
+        if(isset($options['oauth_params'])){
+            $params = $options['oauth_params'];
+            unset($options['oauth_params']);
+        }
+
+        $params = array_merge(array(
             'client_id'		 => $this->oauth_params['client_id'],
             'client_secret'	 => $this->oauth_params['client_secret'],
             'refresh_token'	 => $refresh_token,
             'grant_type'	 => 'refresh_token',
-        );
+        ), $params);
 
         return $this->oAuthRequest($params, $options);
     }

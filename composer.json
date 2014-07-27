@@ -12,8 +12,8 @@
 	],
 	"keywords": ["commonledger"],
 	"autoload": {
-		"psr-0": {
-			"CommonLedger\\": "lib/"
+		"psr-4": {
+			"CommonLedger\\Sdk\\": "lib/"
 		}
 	},
 	"require": {

@@ -1,12 +1,12 @@
 <?php
 
-namespace CommonLedger\HttpClient;
+namespace CommonLedger\Sdk\HttpClient;
 
-use CommonLedger\Exception\OAuthException;
+use CommonLedger\Sdk\Exception\OAuthException;
 use Guzzle\Common\Event;
 use Guzzle\Http\Message\Request;
 
-use CommonLedger\Exception\ClientException;
+use CommonLedger\Sdk\Exception\ClientException;
 
 /**
  * ErrorHanlder takes care of selecting the error message from response body
