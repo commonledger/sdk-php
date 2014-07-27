@@ -29,6 +29,9 @@ class ErrorHandler
         if (gettype($body) == 'string') {
             $message = $body;
         }
+        else if(isset($body['data'])){
+            $body = $body['data'];
+        }
 
         // If JSON, a particular field is taken and used
         if ($response->isContentType('json') && is_array($body)) {

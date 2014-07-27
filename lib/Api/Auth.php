@@ -141,12 +141,7 @@ class Auth {
         }
 
         $url = $this->oauth_params['base'] . '/token';
-        try {
-            $response = $this->client->post($url, $params, $options);
-        }
-        catch(ClientException $error){
-            throw new OAuthException($error->getMessage(), $error->getCode());
-        }
+        $response = $this->client->post($url, $params, $options);
 
         $access_token = $response->body;
         $access_token['expires'] = date('c', time() + $access_token['expires_in']);

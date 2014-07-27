@@ -126,4 +126,25 @@ class Account extends AbstractEndpoint
         return $response;
     }
 
+    /**
+     * GET /user/{user_id}/chart/{chart_id}/acciybt/count
+     *
+     * Get a count of the current number of Accounts for the current Chart
+     *
+     * @param array $options Optional arguments to pass to pass to the request
+     *
+     * @return \CommonLedger\Sdk\HttpClient\Response
+     */
+    public function count(array $options = array())
+    {
+        if(isset($options['body']))
+            $body = array_merge($body, $options['body']);
+
+        $response = $this->client->post($this->endpoint, $options);
+
+        return $response;
+    }
+
+
+
 }

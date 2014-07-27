@@ -105,6 +105,28 @@ class Ledger extends AbstractEndpoint
         return $response;
     }
 
+
+
+    /**
+     * GET /ledger/count
+     *
+     * Get a count of the current number of Ledgers for the current User
+     *
+     * @param array $options Optional arguments to pass to pass to the request
+     *
+     * @return \CommonLedger\Sdk\HttpClient\Response
+     */
+    public function count(array $options = array())
+    {
+        if(isset($options['body']))
+            $body = array_merge($body, $options['body']);
+
+        $response = $this->client->post($this->endpoint, $body, $options);
+
+        return $response;
+    }   
+
+
     /**
      * Get the addon endpoint for a Ledger
      *
