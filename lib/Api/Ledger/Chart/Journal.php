@@ -161,7 +161,7 @@ class Journal extends AbstractEndpoint
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post($this->endpoint, $body, $options);
+        $response = $this->client->post($this->endpoint, $options);
 
         return $response;
     }      

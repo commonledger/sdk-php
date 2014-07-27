@@ -67,4 +67,24 @@ class Addon extends AbstractEndpoint
         return $response;
     }
 
+    /**
+     * GET /ledger/{ledger_id}/addon/count
+     *
+     * Get a count of the current number of Addons for the current Ledger
+     *
+     * @param array $options Optional arguments to pass to pass to the request
+     *
+     * @return \CommonLedger\Sdk\HttpClient\Response
+     */
+    public function count(array $options = array())
+    {
+        if(isset($options['body']))
+            $body = array_merge($body, $options['body']);
+
+        $response = $this->client->post($this->endpoint, $options);
+
+        return $response;
+    }   
+
+
 }
