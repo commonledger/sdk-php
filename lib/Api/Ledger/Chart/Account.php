@@ -158,10 +158,7 @@ class Account extends AbstractEndpoint
      */
     public function count(array $options = array())
     {
-        if(isset($options['body']))
-            $body = array_merge($body, $options['body']);
-
-        $response = $this->client->post($this->endpoint, $options);
+        $response = $this->client->get($this->endpoint . '/count', $options);
 
         return $response;
     }  
