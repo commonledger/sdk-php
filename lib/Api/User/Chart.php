@@ -165,4 +165,15 @@ class Chart extends AbstractEndpoint
         return new Chart\Tax($this->endpoint, $chart_id, $this->client);
     }
 
+    /**
+     * Get the map endpoint of a Chart
+     *
+     * @param string $chart_id The Chart UUID for the map endpoint
+     * @return Chart\Map
+     */
+    public function map($chart_id)
+    {
+        return new Chart\Map($this->endpoint, $chart_id, $this->client);
+    }
+
 }
