@@ -126,6 +126,28 @@ class Account extends AbstractEndpoint
         return $response;
     }
 
+   /**
+     * POST /user/{user_id}/chart/{chart_id}/account/sync
+     *
+     * Sync multiple Account objects with the current Chart. Uses origin id properties for
+     * collision detection. Primarily used by foreign accounting package Connectors.
+     *
+     * @param array $body An array of Account data arrays
+     * @param array $options Optional arguments to pass to pass to the request
+     *
+     * @return \CommonLedger\Sdk\HttpClient\Response
+     */
+    public function sync(array $body, array $options = array())
+    {
+        if(isset($options['body']))
+            $body = array_merge($body, $options['body']);
+
+        $response = $this->client->post($this->endpoint . '/sync', $body, $options);
+
+        return $response;
+    }
+
+
     /**
      * GET /user/{user_id}/chart/{chart_id}/acciybt/count
      *
