@@ -40,16 +40,16 @@ require_once 'vendor/autoload.php';
 ##### Without any authentication
 
 ```php
-$client = new \CommonLedger\Client();
+$client = new \CommonLedger\Sdk\Client();
 
 // If you need to send options
-$client = new \CommonLedger\Client(null, $options);
+$client = new \CommonLedger\Sdk\Client(null, $options);
 ```
 
 ##### OAuth 2.0 Access Token
 
 ```php
-$client = new \CommonLedger\Client('ACCESS-TOKEN', $options);
+$client = new \CommonLedger\Sdk\Client('ACCESS-TOKEN', $options);
 ```
 
 ##### Setting the access token after init
