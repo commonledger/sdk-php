@@ -52,6 +52,22 @@ class Auth {
     }
 
     /**
+     * (Alias to getAccessCodeUrl-  Build the URL to redirect the user to to begin the OAuth 2.0 flow.
+     *
+     * @param string $state An optional state parameter that will be returned
+     * when the authorization is complete
+     * @param string $response_type The type of response, defaults to `code`
+     *
+     * @return string
+     */
+    public function getRedirectUrl($state = null, $response_type = 'code'){
+
+
+        return $this->getAccessCodeUrl($state, $response_type);
+    }
+
+
+    /**
      * Build a URL that will log the user out of their Common Ledger session.
      *
      * @param string $redirect_uri The URL to redirect to when the user has logged out.
