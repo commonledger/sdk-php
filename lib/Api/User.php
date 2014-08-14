@@ -112,9 +112,9 @@ class User extends AbstractEndpoint
      *
      * @return Ledger\Addon
      */
-    public function addon($ledger_id)
+    public function addon($user_id)
     {
-        return new User\Addon($this->endpoint, $ledger_id, $this->client);
+        return new User\Addon($this->endpoint, $user_id, $this->client);
     }
 
     /**
@@ -123,9 +123,9 @@ class User extends AbstractEndpoint
      * @param string $ledger_id The Ledger id for the chart endpoint
      * @return Ledger\Chart
      */
-    public function chart($ledger_id)
+    public function chart($user_id)
     {
-        return new User\Chart($this->endpoint, $ledger_id, $this->client);
+        return new User\Chart($this->endpoint, $user_id, $this->client);
     }
 
     /**
@@ -134,9 +134,9 @@ class User extends AbstractEndpoint
      * @param string $ledger_id The Ledger id for the document endpoint
      * @return Ledger\Document
      */
-    public function document($ledger_id)
+    public function document($user_id)
     {
-        return new User\Document($this->endpoint, $ledger_id, $this->client);
+        return new User\Document($this->endpoint, $user_id, $this->client);
     }
 
 }
