@@ -139,4 +139,8 @@ class User extends AbstractEndpoint
         return new User\Document($this->endpoint, $user_id, $this->client);
     }
 
+    public function ledger($user_id)
+    {
+        return new User\Ledger($this->endpoint, $user_id, $this->client);
+    }
 }
