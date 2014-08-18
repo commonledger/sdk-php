@@ -146,7 +146,7 @@ class Chart extends AbstractEndpoint
     /**
      * Get the account endpoint of a Chart
      *
-     * @param optional string $account_id The Account UUID for the account endpoint, this optional id is needed if you
+     * @param string $account_id The Account UUID for the account endpoint, this optional id is needed if you
      * want to call the 'Account' class member functions 'view', 'update' and 'delete'
      * @return Chart\Account
      */
@@ -158,7 +158,7 @@ class Chart extends AbstractEndpoint
     /**
      * Get the tax endpoint of a Chart
      *
-     * @param optional string $tax_id The Tax UUID for the tax endpoint, this optional id is needed if you
+     * @param string $tax_id The Tax UUID for the tax endpoint, this optional id is needed if you
      * want to call the 'Tax' class member functions 'view', 'update' and 'delete'.
      * @return Chart\Tax
      */
