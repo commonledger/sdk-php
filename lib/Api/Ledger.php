@@ -139,7 +139,7 @@ class Ledger extends AbstractEndpoint
     /**
      * Get the addon endpoint for a Ledger
      *
-     * @param optional string $addon_id The Addon id for the addon endpoint, this id is needed and has to be overloaded
+     * @param optional string $addon_id The Addon id for the addon endpoint, this optional id is needed and has to be overloaded
      * if you want to call the 'Addon' class member function 'view'.
      *
      * @return Ledger\Addon
@@ -152,7 +152,7 @@ class Ledger extends AbstractEndpoint
     /**
      * Get the chart endpoint for a Ledger
      *
-     * @param optional string $chart_id The Chart id for the chart endpoint, this id is needed and has to be overloaded
+     * @param optional string $chart_id The Chart id for the chart endpoint, this optional id is needed and has to be overloaded
      * if you want to call the 'Chart' class member functions 'view', 'update', 'delete', 'account', 'tax' and 'journal'.
      *
      * @return Ledger\Chart
@@ -165,7 +165,7 @@ class Ledger extends AbstractEndpoint
     /**
      * Get the document endpoint for a Ledger
      *
-     * @param optional string $document_id The Document id for the document endpoint, this id is needed and has to be
+     * @param optional string $document_id The Document id for the document endpoint, this optional id is needed and has to be
      * overloaded if you want to call the 'Document' class member functions 'view' and 'update'.
      *
      * @return Ledger\Document
@@ -178,7 +178,7 @@ class Ledger extends AbstractEndpoint
     /**
      * Get the report endpoint for a Ledger
      *
-     * @param string $report_id The Report id for the report endpoint, this id is needed and has to be
+     * @param string $report_id The Report id for the report endpoint, this optional id is needed and has to be
      * overloaded if you want to call the 'Report' class member functions 'view'.
      *
      * @return Ledger\Report

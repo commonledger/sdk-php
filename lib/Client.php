@@ -62,7 +62,7 @@ class Client
     /**
      * Get a new Ledger instance for managing ledgers
      *
-     * @param string $ledger_id, this id is needed if
+     * @param string $ledger_id, this optional id is needed if
      * calling the member functions 'view', 'update', 'delete', 'addon', 'chart', 'document' and 'report'.
      * @return \CommonLedger\Sdk\Api\Ledger
      */
