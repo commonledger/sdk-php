@@ -13,7 +13,7 @@ class Ledger extends AbstractEndpoint
     /**
      * Set $ledger_id class member variable to be passed to member functions to build the ledger endpoint.
      *
-     * @param optional string $ledger_id The UUID of the Ledger
+     * @param string $ledger_id The UUID of the Ledger
      * @param HttpClient $client
      */
     public function __construct($ledger_id, HttpClient $client){
