@@ -19,10 +19,11 @@ class Document extends AbstractEndpoint
      *
      * @param string $prefix
      * @param string $ledger_id
-     * @param string $document_id The UUID of the Document
+     * @param string $document_id The UUID of the Document, this id is needed and has to be
+     * overloaded if you want to call the class member functions 'view' and 'update'
      * @param HttpClient $client
      */
-    public function __construct($prefix, $ledger_id, $document_id, HttpClient $client)
+    public function __construct($prefix, $ledger_id, $document_id = null, HttpClient $client)
     {
         parent::__construct($client);
 

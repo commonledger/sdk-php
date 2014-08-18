@@ -19,10 +19,11 @@ class Report extends AbstractEndpoint
      *
      * @param string $prefix
      * @param string $ledger_id
-     * @param string $report_id The id of the Report to fetch
+     * @param string $report_id The id of the Report to fetch, this id is needed and has to be
+     * overloaded if you want to call the class member functions 'view'
      * @param HttpClient $client
      */
-    public function __construct($prefix, $ledger_id, $report_id, HttpClient $client)
+    public function __construct($prefix, $ledger_id, $report_id = null, HttpClient $client)
     {
         parent::__construct($client);
 

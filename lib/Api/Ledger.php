@@ -13,10 +13,11 @@ class Ledger extends AbstractEndpoint
     /**
      * Set $ledger_id class member variable to be passed to member functions to build the ledger endpoint.
      *
-     * @param string $ledger_id The UUID of the Ledger
+     * @param optional string $ledger_id The UUID of the Ledger, this id is needed if
+     * calling the member functions 'view', 'update', 'delete', 'count', 'addon', 'chart', 'document' and 'report'.
      * @param HttpClient $client
      */
-    public function __construct($ledger_id, HttpClient $client){
+    public function __construct($ledger_id = null, HttpClient $client){
 
         parent::__construct($client);
         $this->ledger_id = $ledger_id;
@@ -139,11 +140,12 @@ class Ledger extends AbstractEndpoint
     /**
      * Get the addon endpoint for a Ledger
      *
-     * @param string $addon_id The Addon id for the addon endpoint
+     * @param optional string $addon_id The Addon id for the addon endpoint, this id is needed and has to be overloaded
+     * if you want to call the 'Addon' class member function 'view'.
      *
      * @return Ledger\Addon
      */
-    public function addon($addon_id)
+    public function addon($addon_id = null)
     {
         return new Ledger\Addon($this->endpoint, $this->ledger_id, $addon_id, $this->client);
     }
@@ -151,11 +153,12 @@ class Ledger extends AbstractEndpoint
     /**
      * Get the chart endpoint for a Ledger
      *
-     * @param string $chart_id The Chart id for the chart endpoint
+     * @param optional string $chart_id The Chart id for the chart endpoint, this id is needed and has to be overloaded
+     * if you want to call the 'Chart' class member functions 'view', 'update', 'delete', 'account', 'tax' and 'journal'.
      *
      * @return Ledger\Chart
      */
-    public function chart($chart_id)
+    public function chart($chart_id = null)
     {
         return new Ledger\Chart($this->endpoint, $this->ledger_id, $chart_id, $this->client);
     }
@@ -163,11 +166,12 @@ class Ledger extends AbstractEndpoint
     /**
      * Get the document endpoint for a Ledger
      *
-     * @param string $document_id The Document id for the document endpoint
+     * @param optional string $document_id The Document id for the document endpoint, this id is needed and has to be
+     * overloaded if you want to call the 'Document' class member functions 'view' and 'update'.
      *
      * @return Ledger\Document
      */
-    public function document($document_id)
+    public function document($document_id = null)
     {
         return new Ledger\Document($this->endpoint, $this->ledger_id, $document_id, $this->client);
     }
@@ -175,11 +179,12 @@ class Ledger extends AbstractEndpoint
     /**
      * Get the report endpoint for a Ledger
      *
-     * @param string $report_id The Report id for the report endpoint
+     * @param string $report_id The Report id for the report endpoint, this id is needed and has to be
+     * overloaded if you want to call the 'Report' class member functions 'view'.
      *
      * @return Ledger\Report
      */
-    public function report($report_id)
+    public function report($report_id = null)
     {
         return new Ledger\Report($this->endpoint, $this->ledger_id, $report_id, $this->client);
     }

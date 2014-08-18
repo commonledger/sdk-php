@@ -19,7 +19,8 @@ class Chart extends AbstractEndpoint
      *
      * @param string $prefix
      * @param string $ledger_id
-     * @param string $chart_id The UUID of the Chart
+     * @param optional string $chart_id The UUID of the Chart, this id is needed if you
+     * want to call the member functions 'view', 'update', 'delete', 'account', 'tax' and 'journal'.
      * @param HttpClient $client
      */
     public function __construct($prefix, $ledger_id, $chart_id, HttpClient $client)
@@ -146,10 +147,11 @@ class Chart extends AbstractEndpoint
     /**
      * Get the account endpoint of a Chart
      *
-     * @param string $account_id The Account UUID for the account endpoint
+     * @param optional string $account_id The Account UUID for the account endpoint, this id is needed if you
+     * want to call the 'Account' class member functions 'view', 'update' and 'delete'
      * @return Chart\Account
      */
-    public function account($account_id)
+    public function account($account_id = null)
     {
         return new Chart\Account($this->endpoint, $this->chart_id, $account_id, $this->client);
     }
@@ -157,10 +159,11 @@ class Chart extends AbstractEndpoint
     /**
      * Get the tax endpoint of a Chart
      *
-     * @param string $tax_id The Tax UUID for the tax endpoint
+     * @param optional string $tax_id The Tax UUID for the tax endpoint, this id is needed if you
+     * want to call the 'Tax' class member functions 'view', 'update' and 'delete'.
      * @return Chart\Tax
      */
-    public function tax($tax_id)
+    public function tax($tax_id = null)
     {
         return new Chart\Tax($this->endpoint, $this->chart_id, $tax_id, $this->client);
     }
@@ -168,10 +171,11 @@ class Chart extends AbstractEndpoint
     /**
      * Get the journal endpoint of a Chart
      *
-     * @param string $journal_id The Journal UUID for the journal endpoint
+     * @param string $journal_id The Journal UUID for the journal endpoint, this id is needed if you
+     * want to call the 'Tax' class member functions 'view', 'update' and 'delete'.
      * @return Chart\Journal
      */
-    public function journal($journal_id)
+    public function journal($journal_id = null)
     {
         return new Chart\Journal($this->endpoint, $this->chart_id, $journal_id, $this->client);
     }

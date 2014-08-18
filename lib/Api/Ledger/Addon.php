@@ -19,10 +19,10 @@ class Addon extends AbstractEndpoint
      *
      * @param string $prefix
      * @param string $ledger_id
-     * @param string $addon_id
+     * @param optional string $addon_id, this id is needed when calling the 'view' member function.
      * @param HttpClient $client
      */
-    public function __construct($prefix, $ledger_id, $addon_id, HttpClient $client)
+    public function __construct($prefix, $ledger_id, $addon_id = null, HttpClient $client)
     {
         parent::__construct($client);
 
