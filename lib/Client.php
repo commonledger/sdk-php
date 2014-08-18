@@ -62,10 +62,11 @@ class Client
     /**
      * Get a new Ledger instance for managing ledgers
      *
-     * @param string $ledger_id
+     * @param string $ledger_id, this id is needed if
+     * calling the member functions 'view', 'update', 'delete', 'addon', 'chart', 'document' and 'report'.
      * @return \CommonLedger\Sdk\Api\Ledger
      */
-    public function ledger($ledger_id)
+    public function ledger($ledger_id = null)
     {
         return new Api\Ledger($ledger_id, $this->httpClient);
     }
