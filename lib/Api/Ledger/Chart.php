@@ -19,8 +19,7 @@ class Chart extends AbstractEndpoint
      *
      * @param string $prefix
      * @param string $ledger_id
-     * @param optional string $chart_id The UUID of the Chart, this id is needed if you
-     * want to call the member functions 'view', 'update', 'delete', 'account', 'tax' and 'journal'.
+     * @param string $chart_id The UUID of the Chart
      * @param HttpClient $client
      */
     public function __construct($prefix, $ledger_id, $chart_id, HttpClient $client)

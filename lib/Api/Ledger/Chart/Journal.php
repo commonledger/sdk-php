@@ -22,7 +22,7 @@ class Journal extends AbstractEndpoint
      * @param string $journal_id The UUID of the Journal to fetch
      * @param HttpClient $client
      */
-    public function __construct($prefix, $chart_id, $journal_id = null, HttpClient $client)
+    public function __construct($prefix, $chart_id, $journal_id, HttpClient $client)
     {
         parent::__construct($client);
 
