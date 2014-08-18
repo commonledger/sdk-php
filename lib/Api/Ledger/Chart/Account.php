@@ -19,10 +19,11 @@ class Account extends AbstractEndpoint
      *
      * @param string $prefix
      * @param string $chart_id
-     * @param string $account_id The UUID of the Account
+     * @param optional string $account_id The UUID of the Account, this id is needed if you
+     * want to call the class member functions 'view', 'update' and 'delete'
      * @param HttpClient $client
      */
-    public function __construct($prefix, $chart_id, $account_id, HttpClient $client)
+    public function __construct($prefix, $chart_id, $account_id = null, HttpClient $client)
     {
         parent::__construct($client);
 

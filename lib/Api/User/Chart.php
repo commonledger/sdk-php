@@ -12,20 +12,23 @@ class Chart extends AbstractEndpoint
 
     private $user_id;
     private $endpoint = 'chart';
+    private $chart_id;
 
     /**
      * Create a new Chart endpoint relative to a User
      *
      * @param string $prefix
      * @param string $user_id
+     * @param string $chart_id
      * @param HttpClient $client
      */
-    public function __construct($prefix, $user_id, HttpClient $client)
+    public function __construct($prefix, $user_id, $chart_id, HttpClient $client)
     {
         parent::__construct($client);
 
         $this->user_id = $user_id;
         $this->endpoint = sprintf('%s/%s/%s', $prefix, $user_id, $this->endpoint);
+        $this->chart_id = $chart_id;
     }
 
 
@@ -73,16 +76,15 @@ class Chart extends AbstractEndpoint
      *
      * Get a Chart from the current User by the Chart id
      *
-     * @param string $chart_id The UUID of the Chart to fetch
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function view($chart_id, array $options = array())
+    public function view(array $options = array())
     {
         $query = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get($this->endpoint . '/' . $chart_id, $query, $options);
+        $response = $this->client->get($this->endpoint . '/' . $this->chart_id, $query, $options);
 
         return $response;
     }
@@ -92,18 +94,17 @@ class Chart extends AbstractEndpoint
      *
      * Update the data for a Chart on the current User
      *
-     * @param string $chart_id The UUID of the Chart
      * @param array $body The Chart data
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function update($chart_id, array $body, array $options = array())
+    public function update(array $body, array $options = array())
     {
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post($this->endpoint . '/' . $chart_id, $body, $options);
+        $response = $this->client->post($this->endpoint . '/' . $this->chart_id, $body, $options);
 
         return $response;
     }
@@ -113,16 +114,15 @@ class Chart extends AbstractEndpoint
      *
      * Delete the association of a Chart to the current User
      *
-     * @param string $chart_id The UUID of the Chart to delete
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function delete($chart_id, array $options = array())
+    public function delete(array $options = array())
     {
         $body = (isset($options['body']) ? $options['body'] : array());
 
-        $response = $this->client->delete($this->endpoint . '/' . $chart_id, $body, $options);
+        $response = $this->client->delete($this->endpoint . '/' . $this->chart_id, $body, $options);
 
         return $response;
     }
@@ -146,34 +146,34 @@ class Chart extends AbstractEndpoint
     /**
      * Get the account endpoint of a Chart
      *
-     * @param string $chart_id The Chart UUID for the account endpoint
+     * @param string $account_id The Account UUID for the account endpoint
      * @return Chart\Account
      */
-    public function account($chart_id)
+    public function account($account_id)
     {
-        return new Chart\Account($this->endpoint, $chart_id, $this->client);
+        return new Chart\Account($this->endpoint, $this->$chart_id, $account_id, $this->client);
     }
 
     /**
      * Get the tax endpoint of a Chart
      *
-     * @param string $chart_id The Chart UUID for the tax endpoint
-     * @return Chart\Account
+     * @param string $tax_id The Tax UUID for the tax endpoint
+     * @return Chart\Tax
      */
-    public function tax($chart_id)
+    public function tax($tax_id)
     {
-        return new Chart\Tax($this->endpoint, $chart_id, $this->client);
+        return new Chart\Tax($this->endpoint, $this->chart_id, $tax_id, $this->client);
     }
 
     /**
      * Get the map endpoint of a Chart
      *
-     * @param string $chart_id The Chart UUID for the map endpoint
+     * @param string $map_id The Map UUID for the map endpoint
      * @return Chart\Map
      */
-    public function map($chart_id)
+    public function map($map_id)
     {
-        return new Chart\Map($this->endpoint, $chart_id, $this->client);
+        return new Chart\Map($this->endpoint, $this->chart_id, $map_id, $this->client);
     }
 
 }

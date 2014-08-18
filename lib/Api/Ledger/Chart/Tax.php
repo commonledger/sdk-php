@@ -19,10 +19,11 @@ class Tax extends AbstractEndpoint
      *
      * @param string $prefix
      * @param string $chart_id
-     * @param string $tax_id The UUID of the Tax to fetch
+     * @param optional string $tax_id The UUID of the Tax to fetch, this id is needed if you
+     * want to call the class member functions 'view', 'update' and 'delete'.
      * @param HttpClient $client
      */
-    public function __construct($prefix, $chart_id, $tax_id, HttpClient $client)
+    public function __construct($prefix, $chart_id, $tax_id = null, HttpClient $client)
     {
         parent::__construct($client);
 
