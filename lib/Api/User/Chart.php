@@ -146,10 +146,11 @@ class Chart extends AbstractEndpoint
     /**
      * Get the account endpoint of a Chart
      *
-     * @param string $account_id The Account UUID for the account endpoint
+     * @param string $account_id The Account UUID for the account endpoint, this optional id is needed if you
+     * want to call the 'Account' class member functions 'view', 'update' and 'delete'
      * @return Chart\Account
      */
-    public function account($account_id)
+    public function account($account_id = null)
     {
         return new Chart\Account($this->endpoint, $this->$chart_id, $account_id, $this->client);
     }
@@ -157,10 +158,11 @@ class Chart extends AbstractEndpoint
     /**
      * Get the tax endpoint of a Chart
      *
-     * @param string $tax_id The Tax UUID for the tax endpoint
+     * @param string $tax_id The Tax UUID for the tax endpoint, this optional id is needed if you
+     * want to call the 'Tax' class member functions 'view', 'update' and 'delete'.
      * @return Chart\Tax
      */
-    public function tax($tax_id)
+    public function tax($tax_id = null)
     {
         return new Chart\Tax($this->endpoint, $this->chart_id, $tax_id, $this->client);
     }
@@ -168,10 +170,11 @@ class Chart extends AbstractEndpoint
     /**
      * Get the map endpoint of a Chart
      *
-     * @param string $map_id The Map UUID for the map endpoint
+     * @param string $map_id The Map UUID for the map endpoint, this optional id is needed if you
+     * want to call the 'Map' class member functions 'view', 'update' and 'delete'.
      * @return Chart\Map
      */
-    public function map($map_id)
+    public function map($map_id = null)
     {
         return new Chart\Map($this->endpoint, $this->chart_id, $map_id, $this->client);
     }

@@ -62,8 +62,8 @@ class Client
     /**
      * Get a new Ledger instance for managing ledgers
      *
-     * @param string $ledger_id, this optional id is needed if
-     * calling the member functions 'view', 'update', 'delete', 'addon', 'chart', 'document' and 'report'.
+     * @param string $ledger_id, this optional id is needed if calling the 'Ledger' class member
+     * functions 'view', 'update', 'delete', 'addon', 'chart', 'document' and 'report'.
      * @return \CommonLedger\Sdk\Api\Ledger
      */
     public function ledger($ledger_id = null)
@@ -74,10 +74,11 @@ class Client
     /**
      * Get a new User instance for managing users
      *
-     * @param string $user_id
+     * @param string $user_id, this optional id is needed if calling the 'User' class member functions
+     * 'view', 'update', 'delete', 'addon', 'chart', 'document' and 'ledger'.
      * @return \CommonLedger\Sdk\Api\User
      */
-    public function user($user_id)
+    public function user($user_id = null)
     {
         return new Api\User($user_id, $this->httpClient);
     }

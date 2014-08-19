@@ -13,7 +13,8 @@ class User extends AbstractEndpoint
     /**
      * Set $user_id class member variable to be passed to member functions to build the user endpoint.
      *
-     * @param string $user_id
+     * @param string $user_id, , this id is needed if calling the member functions 'view',
+     * 'update', 'delete', 'addon', 'chart', 'document' and 'report' and 'ledger'.
      * @param HttpCleint $client
      */
     public function __construct($user_id, HttpClient $client){
@@ -119,11 +120,12 @@ class User extends AbstractEndpoint
     /**
      * Get the addon endpoint for a User
      *
-     * @param string $addon_id The Addon id for the addon endpoint
+     * @param string $addon_id The Addon id for the addon endpoint, this optional id is needed and has to be overloaded
+     * if you want to call the 'Addon' class member function 'view'.
      *
      * @return User\Addon
      */
-    public function addon($addon_id)
+    public function addon($addon_id = null)
     {
         return new User\Addon($this->endpoint, $this->user_id, $addon_id, $this->client);
     }
@@ -131,10 +133,11 @@ class User extends AbstractEndpoint
     /**
      * Get the chart endpoint for a User
      *
-     * @param string $chart_id The Chart id for the chart endpoint
+     * @param string $chart_id The Chart id for the chart endpoint, this optional id is needed and has to be overloaded
+     * if you want to call the 'Chart' class member functions 'view', 'update', 'delete', 'account', 'tax' and 'map'.
      * @return User\Chart
      */
-    public function chart($chart_id)
+    public function chart($chart_id = null)
     {
         return new User\Chart($this->endpoint, $this->user_id, $chart_id, $this->client);
     }
@@ -142,10 +145,11 @@ class User extends AbstractEndpoint
     /**
      * Get the document endpoint for a User
      *
-     * @param string $document_id The Document id for the document endpoint
+     * @param string $document_id The Document id for the document endpoint, this optional id is needed and has to be
+     * overloaded if you want to call the 'Document' class member functions 'view' and 'update'.
      * @return User\Document
      */
-    public function document($document_id)
+    public function document($document_id = null)
     {
         return new User\Document($this->endpoint, $this->user_id, $document_id, $this->client);
     }
@@ -153,7 +157,8 @@ class User extends AbstractEndpoint
     /**
      * Get the ledger endpoint for a User
      *
-     * @param $ledger_id The Ledger id for the ledger endpoint
+     * @param $ledger_id The Ledger id for the ledger endpoint, this optional id is needed and has to be overloaded
+     * if you want to call the 'Ledger' class member functions 'view'.
      * @return User\Ledger
      */
     public function ledger($ledger_id)
