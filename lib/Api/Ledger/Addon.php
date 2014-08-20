@@ -22,7 +22,7 @@ class Addon extends AbstractEndpoint
      * @param string $addon_id
      * @param HttpClient $client
      */
-    public function __construct($prefix, $ledger_id, $addon_id, HttpClient $client)
+    public function __construct($prefix, $ledger_id, $addon_id = 'current', HttpClient $client)
     {
         parent::__construct($client);
 
