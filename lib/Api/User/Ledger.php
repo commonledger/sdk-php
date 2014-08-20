@@ -22,7 +22,7 @@ class Ledger extends AbstractEndpoint
      * @param string $ledger_id
      * @param HttpClient $client
      */
-    public function __construct($prefix, $user_id, $ledger_id, HttpClient $client)
+    public function __construct($prefix, $user_id, $ledger_id = 'current', HttpClient $client)
     {
         parent::__construct($client);
 

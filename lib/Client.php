@@ -66,7 +66,7 @@ class Client
      * functions 'view', 'update', 'delete', 'addon', 'chart', 'document' and 'report'.
      * @return \CommonLedger\Sdk\Api\Ledger
      */
-    public function ledger($ledger_id = null)
+    public function ledger($ledger_id = 'current')
     {
         return new Api\Ledger($ledger_id, $this->httpClient);
     }
@@ -78,7 +78,7 @@ class Client
      * 'view', 'update', 'delete', 'addon', 'chart', 'document' and 'ledger'.
      * @return \CommonLedger\Sdk\Api\User
      */
-    public function user($user_id = null)
+    public function user($user_id = 'current')
     {
         return new Api\User($user_id, $this->httpClient);
     }

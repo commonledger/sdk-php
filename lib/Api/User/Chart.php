@@ -22,7 +22,7 @@ class Chart extends AbstractEndpoint
      * @param string $chart_id
      * @param HttpClient $client
      */
-    public function __construct($prefix, $user_id, $chart_id, HttpClient $client)
+    public function __construct($prefix, $user_id, $chart_id = 'current', HttpClient $client)
     {
         parent::__construct($client);
 

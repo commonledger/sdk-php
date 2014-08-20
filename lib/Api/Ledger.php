@@ -16,7 +16,7 @@ class Ledger extends AbstractEndpoint
      * @param string $ledger_id The UUID of the Ledger
      * @param HttpClient $client
      */
-    public function __construct($ledger_id, HttpClient $client){
+    public function __construct($ledger_id = 'current', HttpClient $client){
 
         parent::__construct($client);
         $this->ledger_id = $ledger_id;
@@ -144,7 +144,7 @@ class Ledger extends AbstractEndpoint
      *
      * @return Ledger\Addon
      */
-    public function addon($addon_id = null)
+    public function addon($addon_id = 'current')
     {
         return new Ledger\Addon($this->endpoint, $this->ledger_id, $addon_id, $this->client);
     }
@@ -157,7 +157,7 @@ class Ledger extends AbstractEndpoint
      *
      * @return Ledger\Chart
      */
-    public function chart($chart_id = null)
+    public function chart($chart_id = 'current')
     {
         return new Ledger\Chart($this->endpoint, $this->ledger_id, $chart_id, $this->client);
     }

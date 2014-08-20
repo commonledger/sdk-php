@@ -15,9 +15,9 @@ class User extends AbstractEndpoint
      *
      * @param string $user_id, , this id is needed if calling the member functions 'view',
      * 'update', 'delete', 'addon', 'chart', 'document' and 'report' and 'ledger'.
-     * @param HttpCleint $client
+     * @param HttClient $client
      */
-    public function __construct($user_id, HttpClient $client){
+    public function __construct($user_id = 'current', HttpClient $client){
 
         parent::__construct($client);
         $this->user_id = $user_id;
@@ -125,7 +125,7 @@ class User extends AbstractEndpoint
      *
      * @return User\Addon
      */
-    public function addon($addon_id = null)
+    public function addon($addon_id = 'current')
     {
         return new User\Addon($this->endpoint, $this->user_id, $addon_id, $this->client);
     }
@@ -137,7 +137,7 @@ class User extends AbstractEndpoint
      * if you want to call the 'Chart' class member functions 'view', 'update', 'delete', 'account', 'tax' and 'map'.
      * @return User\Chart
      */
-    public function chart($chart_id = null)
+    public function chart($chart_id = 'current')
     {
         return new User\Chart($this->endpoint, $this->user_id, $chart_id, $this->client);
     }
@@ -161,7 +161,7 @@ class User extends AbstractEndpoint
      * if you want to call the 'Ledger' class member functions 'view'.
      * @return User\Ledger
      */
-    public function ledger($ledger_id)
+    public function ledger($ledger_id = 'current')
     {
         return new User\Ledger($this->endpoint, $this->user_id, $ledger_id, $this->client);
     }
