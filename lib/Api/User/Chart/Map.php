@@ -12,6 +12,7 @@ class Map extends AbstractEndpoint
 
     private $chart_id;
     private $endpoint = 'map';
+    private $map_id;
 
     /**
      * Create a new Map endpoint relative to a Chart for a User
@@ -20,12 +21,13 @@ class Map extends AbstractEndpoint
      * @param string $chart_id
      * @param HttpClient $client
      */
-    public function __construct($prefix, $chart_id, HttpClient $client)
+    public function __construct($prefix, $chart_id, $map_id, HttpClient $client)
     {
         parent::__construct($client);
 
         $this->chart_id = $chart_id;
         $this->endpoint = sprintf('%s/%s/%s', $prefix, $chart_id, $this->endpoint);
+        $this->map_id = $map_id;
 
     }
 
@@ -77,11 +79,11 @@ class Map extends AbstractEndpoint
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function view($map_id, array $options = array())
+    public function view(array $options = array())
     {
         $query = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get($this->endpoint . '/' . $map_id, $query, $options);
+        $response = $this->client->get($this->endpoint . '/' . $this->map_id, $query, $options);
 
         return $response;
     }
@@ -97,12 +99,12 @@ class Map extends AbstractEndpoint
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function update($map_id, array $body, array $options = array())
+    public function update(array $body, array $options = array())
     {
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post($this->endpoint . '/' . $map_id, $body, $options);
+        $response = $this->client->post($this->endpoint . '/' . $this->map_id, $body, $options);
 
         return $response;
     }
@@ -117,11 +119,11 @@ class Map extends AbstractEndpoint
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function delete($map_id, array $options = array())
+    public function delete(array $options = array())
     {
         $body = (isset($options['body']) ? $options['body'] : array());
 
-        $response = $this->client->delete($this->endpoint . '/' . $map_id, $body, $options);
+        $response = $this->client->delete($this->endpoint . '/' . $this->map_id, $body, $options);
 
         return $response;
     }

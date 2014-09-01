@@ -12,20 +12,23 @@ class Report extends AbstractEndpoint
 
     private $ledger_id;
     private $endpoint = 'report';
+    private $report_id;
 
     /**
      * Create a new Document endpoint relative to a Ledger
      *
      * @param string $prefix
      * @param string $ledger_id
+     * @param string $report_id The id of the Report to fetch
      * @param HttpClient $client
      */
-    public function __construct($prefix, $ledger_id, HttpClient $client)
+    public function __construct($prefix, $ledger_id, $report_id, HttpClient $client)
     {
         parent::__construct($client);
 
         $this->ledger_id = $ledger_id;
         $this->endpoint = sprintf('%s/%s/%s', $prefix, $ledger_id, $this->endpoint);
+        $this->report_id = $report_id;
     }
 
 
@@ -52,16 +55,15 @@ class Report extends AbstractEndpoint
      *
      * Get a Report from the current Ledger by the Report id
      *
-     * @param string $report_id The id of the Report to fetch
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function view($report_id, array $options = array())
+    public function view(array $options = array())
     {
         $query = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get($this->endpoint . '/' . $report_id, $query, $options);
+        $response = $this->client->get($this->endpoint . '/' . $this->report_id, $query, $options);
 
         return $response;
     }

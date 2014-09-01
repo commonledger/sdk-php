@@ -11,6 +11,7 @@ class Tax extends AbstractEndpoint
 
     private $chart_id;
     private $endpoint = 'tax';
+    private $tax_id;
 
     /**
      * Create a new Tax endpoint relative to a Chart for a User
@@ -19,12 +20,13 @@ class Tax extends AbstractEndpoint
      * @param string $chart_id
      * @param HttpClient $client
      */
-    public function __construct($prefix, $chart_id, HttpClient $client)
+    public function __construct($prefix, $chart_id, $tax_id, HttpClient $client)
     {
         parent::__construct($client);
 
         $this->chart_id = $chart_id;
         $this->endpoint = sprintf('%s/%s/%s', $prefix, $chart_id, $this->endpoint);
+        $this->tax_id = $tax_id;
 
     }
 
@@ -76,11 +78,11 @@ class Tax extends AbstractEndpoint
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function view($tax_id, array $options = array())
+    public function view(array $options = array())
     {
         $query = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get($this->endpoint . '/' . $tax_id, $query, $options);
+        $response = $this->client->get($this->endpoint . '/' . $this->tax_id, $query, $options);
 
         return $response;
     }
@@ -96,12 +98,12 @@ class Tax extends AbstractEndpoint
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function update($tax_id, array $body, array $options = array())
+    public function update(array $body, array $options = array())
     {
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post($this->endpoint . '/' . $tax_id, $body, $options);
+        $response = $this->client->post($this->endpoint . '/' . $this->tax_id, $body, $options);
 
         return $response;
     }
@@ -116,11 +118,11 @@ class Tax extends AbstractEndpoint
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function delete($tax_id, array $options = array())
+    public function delete(array $options = array())
     {
         $body = (isset($options['body']) ? $options['body'] : array());
 
-        $response = $this->client->delete($this->endpoint . '/' . $tax_id, $body, $options);
+        $response = $this->client->delete($this->endpoint . '/' . $this->tax_id, $body, $options);
 
         return $response;
     }
