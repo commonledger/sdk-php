@@ -32,7 +32,6 @@ class Account extends AbstractEndpoint
 
     }
 
-
     /**
      * GET /ledger/{ledger_id}/chart/{chart_id}/account
      *
