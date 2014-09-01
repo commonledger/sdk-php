@@ -12,20 +12,23 @@ class Ledger extends AbstractEndpoint
 
     private $user_id;
     private $endpoint = 'ledger';
+    private $ledger_id;
 
     /**
      * Create a new Ledger endpoint relative to a User
      *
      * @param string $prefix
      * @param string $user_id
+     * @param string $ledger_id
      * @param HttpClient $client
      */
-    public function __construct($prefix, $user_id, HttpClient $client)
+    public function __construct($prefix, $user_id, $ledger_id = 'current', HttpClient $client)
     {
         parent::__construct($client);
 
         $this->user_id = $user_id;
         $this->endpoint = sprintf('%s/%s/%s', $prefix, $user_id, $this->endpoint);
+        $this->ledger_id = $ledger_id;
     }
 
 
@@ -53,16 +56,15 @@ class Ledger extends AbstractEndpoint
      *
      * Get an Ledger from the current User by the Ledger id
      *
-     * @param string $ledger_id The UUID of the Ledger to fetch
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function view($ledger_id, array $options = array())
+    public function view(array $options = array())
     {
         $query = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get($this->endpoint . '/' . $ledger_id, $query, $options);
+        $response = $this->client->get($this->endpoint . '/' . $this->ledger_id, $query, $options);
 
         return $response;
     }

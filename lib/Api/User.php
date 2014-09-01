@@ -3,10 +3,26 @@
 namespace CommonLedger\Sdk\Api;
 
 
+use CommonLedger\Sdk\HttpClient\HttpClient;
+
 class User extends AbstractEndpoint
 {
-
+    private $user_id;
     private $endpoint = 'user';
+
+    /**
+     * Set $user_id class member variable to be passed to member functions to build the user endpoint.
+     *
+     * @param string $user_id, , this id is needed if calling the member functions 'view',
+     * 'update', 'delete', 'addon', 'chart', 'document' and 'report' and 'ledger'.
+     * @param HttClient $client
+     */
+    public function __construct($user_id = 'current', HttpClient $client){
+
+        parent::__construct($client);
+        $this->user_id = $user_id;
+
+    }
 
     /**
      * GET /user
@@ -50,17 +66,15 @@ class User extends AbstractEndpoint
      * GET /user/{user_id}
      *
      * Get a User by it's UUID
-     *
-     * @param string $user_id The UUID of the User
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function view($user_id, array $options = array())
+    public function view(array $options = array())
     {
         $query = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get($this->endpoint . '/' . $user_id, $query, $options);
+        $response = $this->client->get($this->endpoint . '/' . $this->user_id, $query, $options);
 
         return $response;
     }
@@ -70,18 +84,17 @@ class User extends AbstractEndpoint
      *
      * Update the data for a User
      *
-     * @param string $user_id The UUID of the User
      * @param array $body The User data
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function update($user_id, array $body, array $options = array())
+    public function update(array $body, array $options = array())
     {
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post($this->endpoint . '/' . $user_id, $body, $options);
+        $response = $this->client->post($this->endpoint . '/' . $this->user_id, $body, $options);
 
         return $response;
     }
@@ -91,16 +104,15 @@ class User extends AbstractEndpoint
      *
      * Delete a User
      *
-     * @param string $user_id The UUID of the User to delete
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function delete($user_id, array $options = array())
+    public function delete(array $options = array())
     {
         $body = (isset($options['body']) ? $options['body'] : array());
 
-        $response = $this->client->delete($this->endpoint . '/' . $user_id, $body, $options);
+        $response = $this->client->delete($this->endpoint . '/' . $this->user_id, $body, $options);
 
         return $response;
     }
@@ -108,35 +120,49 @@ class User extends AbstractEndpoint
     /**
      * Get the addon endpoint for a User
      *
-     * @param string $ledger_id The Ledger id for the addon endpoint
+     * @param string $addon_id The Addon id for the addon endpoint, this optional id is needed and has to be overloaded
+     * if you want to call the 'Addon' class member function 'view'.
      *
-     * @return Ledger\Addon
+     * @return User\Addon
      */
-    public function addon($ledger_id)
+    public function addon($addon_id = 'current')
     {
-        return new User\Addon($this->endpoint, $ledger_id, $this->client);
+        return new User\Addon($this->endpoint, $this->user_id, $addon_id, $this->client);
     }
 
     /**
      * Get the chart endpoint for a User
      *
-     * @param string $ledger_id The Ledger id for the chart endpoint
-     * @return Ledger\Chart
+     * @param string $chart_id The Chart id for the chart endpoint, this optional id is needed and has to be overloaded
+     * if you want to call the 'Chart' class member functions 'view', 'update', 'delete', 'account', 'tax' and 'map'.
+     * @return User\Chart
      */
-    public function chart($ledger_id)
+    public function chart($chart_id = 'current')
     {
-        return new User\Chart($this->endpoint, $ledger_id, $this->client);
+        return new User\Chart($this->endpoint, $this->user_id, $chart_id, $this->client);
     }
 
     /**
      * Get the document endpoint for a User
      *
-     * @param string $ledger_id The Ledger id for the document endpoint
-     * @return Ledger\Document
+     * @param string $document_id The Document id for the document endpoint, this optional id is needed and has to be
+     * overloaded if you want to call the 'Document' class member functions 'view' and 'update'.
+     * @return User\Document
      */
-    public function document($ledger_id)
+    public function document($document_id = null)
     {
-        return new User\Document($this->endpoint, $ledger_id, $this->client);
+        return new User\Document($this->endpoint, $this->user_id, $document_id, $this->client);
     }
 
+    /**
+     * Get the ledger endpoint for a User
+     *
+     * @param $ledger_id The Ledger id for the ledger endpoint, this optional id is needed and has to be overloaded
+     * if you want to call the 'Ledger' class member functions 'view'.
+     * @return User\Ledger
+     */
+    public function ledger($ledger_id = 'current')
+    {
+        return new User\Ledger($this->endpoint, $this->user_id, $ledger_id, $this->client);
+    }
 }

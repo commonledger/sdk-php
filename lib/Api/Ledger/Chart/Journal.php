@@ -12,20 +12,23 @@ class Journal extends AbstractEndpoint
 
     private $chart_id;
     private $endpoint = 'journal';
+    private $journal_id;
 
     /**
      * Create a new Journal endpoint relative to a Chart on a Ledger
      *
      * @param string $prefix
      * @param string $chart_id
+     * @param string $journal_id The UUID of the Journal to fetch
      * @param HttpClient $client
      */
-    public function __construct($prefix, $chart_id, HttpClient $client)
+    public function __construct($prefix, $chart_id, $journal_id, HttpClient $client)
     {
         parent::__construct($client);
 
         $this->chart_id = $chart_id;
         $this->endpoint = sprintf('%s/%s/%s', $prefix, $chart_id, $this->endpoint);
+        $this->journal_id = $journal_id;
 
     }
 
@@ -72,16 +75,15 @@ class Journal extends AbstractEndpoint
      *
      * Get a Journal from the current Chart by the Journal id
      *
-     * @param string $journal_id The UUID of the Journal to fetch
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function view($journal_id, array $options = array())
+    public function view(array $options = array())
     {
         $query = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get($this->endpoint . '/' . $journal_id, $query, $options);
+        $response = $this->client->get($this->endpoint . '/' . $this->journal_id, $query, $options);
 
         return $response;
     }
@@ -91,18 +93,17 @@ class Journal extends AbstractEndpoint
      *
      * Update the data for a Journal on the current Chart
      *
-     * @param string $journal_id The UUID of the Journal
      * @param array $body The Journal data
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function update($journal_id, array $body, array $options = array())
+    public function update(array $body, array $options = array())
     {
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post($this->endpoint . '/' . $journal_id, $body, $options);
+        $response = $this->client->post($this->endpoint . '/' . $this->journal_id, $body, $options);
 
         return $response;
     }
@@ -112,16 +113,15 @@ class Journal extends AbstractEndpoint
      *
      * Delete a Journal from the current Chart
      *
-     * @param string $journal_id The UUID of the Journal to delete
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function delete($journal_id, array $options = array())
+    public function delete(array $options = array())
     {
         $body = (isset($options['body']) ? $options['body'] : array());
 
-        $response = $this->client->delete($this->endpoint . '/' . $journal_id, $body, $options);
+        $response = $this->client->delete($this->endpoint . '/' . $this->journal_id, $body, $options);
 
         return $response;
     }
