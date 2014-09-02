@@ -28,7 +28,7 @@ class Tax extends AbstractEndpoint
 
         $this->chart_id = $chart_id;
         $this->endpoint = sprintf('%s/%s/%s', $prefix, $chart_id, $this->endpoint);
-        $this->$tax_id = $tax_id;
+        $this->tax_id = $tax_id;
 
     }
 
