@@ -152,7 +152,7 @@ class Chart extends AbstractEndpoint
      */
     public function account($account_id = null)
     {
-        return new Chart\Account($this->endpoint, $this->$chart_id, $account_id, $this->client);
+        return new Chart\Account($this->endpoint, $this->chart_id, $account_id, $this->client);
     }
 
     /**
