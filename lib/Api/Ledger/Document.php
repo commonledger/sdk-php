@@ -28,7 +28,7 @@ class Document extends AbstractEndpoint
 
         $this->ledger_id = $ledger_id;
         $this->endpoint = sprintf('%s/%s/%s', $prefix, $ledger_id, $this->endpoint);
-        $this->$document_id = $document_id;
+        $this->document_id = $document_id;
     }
 
 
