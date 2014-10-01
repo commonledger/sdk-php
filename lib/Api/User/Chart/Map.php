@@ -3,38 +3,39 @@
 
 namespace CommonLedger\Sdk\Api\User\Chart;
 
+
 use CommonLedger\Sdk\Api\AbstractEndpoint;
 use CommonLedger\Sdk\HttpClient\HttpClient;
 
-class Tax extends AbstractEndpoint
+class Map extends AbstractEndpoint
 {
 
     private $chart_id;
-    private $endpoint = 'tax';
-    private $tax_id;
+    private $endpoint = 'map';
+    private $map_id;
 
     /**
-     * Create a new Tax endpoint relative to a Chart for a User
+     * Create a new Map endpoint relative to a Chart for a User
      *
      * @param string $prefix
      * @param string $chart_id
      * @param HttpClient $client
      */
-    public function __construct($prefix, $chart_id, $tax_id, HttpClient $client)
+    public function __construct($prefix, $chart_id, $map_id, HttpClient $client)
     {
         parent::__construct($client);
 
         $this->chart_id = $chart_id;
         $this->endpoint = sprintf('%s/%s/%s', $prefix, $chart_id, $this->endpoint);
-        $this->tax_id = $tax_id;
+        $this->map_id = $map_id;
 
     }
 
 
     /**
-     * GET /user/{user_id}/chart/{chart_id}/tax
+     * GET /user/{user_id}/chart/{chart_id}/map
      *
-     * List the Taxes for the current Chart
+     * List the Maps for the current Chart
      *
      * @param array $options
      * @return \CommonLedger\Sdk\HttpClient\Response
@@ -49,11 +50,11 @@ class Tax extends AbstractEndpoint
     }
 
     /**
-     * POST /user/{user_id}/chart/{chart_id}/tax
+     * POST /user/{user_id}/chart/{chart_id}/map
      *
-     * Create a new Tax on the current Chart
+     * Create a new Map on the current Chart
      *
-     * @param array $body A key => value array of Tax properties
+     * @param array $body A key => value array of Map properties
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
@@ -69,11 +70,11 @@ class Tax extends AbstractEndpoint
     }
 
     /**
-     * GET /user/{user_id}/chart/{chart_id}/tax/{tax_id}
+     * GET /user/{user_id}/chart/{chart_id}/map/{map_id}
      *
-     * Get a Tax from the current Chart by the Tax id
+     * Get an Map from the current Chart by the Map id
      *
-     * @param string $tax_id The UUID of the Tax to fetch
+     * @param string $map_id The UUID of the Map to fetch
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
@@ -82,18 +83,18 @@ class Tax extends AbstractEndpoint
     {
         $query = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get($this->endpoint . '/' . $this->tax_id, $query, $options);
+        $response = $this->client->get($this->endpoint . '/' . $this->map_id, $query, $options);
 
         return $response;
     }
 
     /**
-     * POST /user/{user_id}/chart/{chart_id}/tax/{tax_id}
+     * POST /user/{user_id}/chart/{chart_id}/map/{map_id}
      *
-     * Update the data for a Tax on the current Chart
+     * Update the data for an Map on the current Chart
      *
-     * @param string $tax_id The UUID of the Tax
-     * @param array $body The Tax data
+     * @param string $map_id The UUID of the Map
+     * @param array $body The Map data
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
@@ -103,17 +104,17 @@ class Tax extends AbstractEndpoint
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post($this->endpoint . '/' . $this->tax_id, $body, $options);
+        $response = $this->client->post($this->endpoint . '/' . $this->map_id, $body, $options);
 
         return $response;
     }
 
     /**
-     * DELETE /user/{user_id}/chart/{chart_id}/tax/{tax_id}
+     * DELETE /user/{user_id}/chart/{chart_id}/map/{map_id}
      *
-     * Delete a Tax from the current Chart
+     * Delete an Map from the current Chart
      *
-     * @param string $tax_id The UUID of the Tax to delete
+     * @param string $map_id The UUID of the Map to delete
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
@@ -122,37 +123,15 @@ class Tax extends AbstractEndpoint
     {
         $body = (isset($options['body']) ? $options['body'] : array());
 
-        $response = $this->client->delete($this->endpoint . '/' . $this->tax_id, $body, $options);
+        $response = $this->client->delete($this->endpoint . '/' . $this->map_id, $body, $options);
 
         return $response;
     }
-
-   /**
-     * POST /user/{user_id}/chart/{chart_id}/tax/sync
-     *
-     * Sync multiple Tax objects with the current Chart. Uses origin id properties for
-     * collision detection. Primarily used by foreign accounting package Connectors.
-     *
-     * @param array $body An array of Tax objects
-     * @param array $options Optional arguments to pass to pass to the request
-     *
-     * @return \CommonLedger\Sdk\HttpClient\Response
-     */
-    public function sync(array $body, array $options = array())
-    {
-        if(isset($options['body']))
-            $body = array_merge($body, $options['body']);
-
-        $response = $this->client->post($this->endpoint . '/sync', $body, $options);
-
-        return $response;
-    }
-
 
     /**
-     * GET /user/{user_id}/chart/{chart_id}/tax/count
+     * GET /user/{user_id}/chart/{chart_id}/map/count
      *
-     * Get a count of the current number of Taxes for the current Chart
+     * Get a count of the current number of Maps for the current Chart
      *
      * @param array $options Optional arguments to pass to pass to the request
      *
@@ -164,6 +143,7 @@ class Tax extends AbstractEndpoint
 
         return $response;
     }
+
 
 
 }

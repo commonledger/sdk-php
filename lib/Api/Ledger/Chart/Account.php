@@ -12,23 +12,25 @@ class Account extends AbstractEndpoint
 
     private $chart_id;
     private $endpoint = 'account';
+    private $account_id;
 
     /**
      * Create a new Account endpoint relative to a Chart on a Ledger
      *
      * @param string $prefix
      * @param string $chart_id
+     * @param string $account_id The UUID of the Account
      * @param HttpClient $client
      */
-    public function __construct($prefix, $chart_id, HttpClient $client)
+    public function __construct($prefix, $chart_id, $account_id, HttpClient $client)
     {
         parent::__construct($client);
 
         $this->chart_id = $chart_id;
         $this->endpoint = sprintf('%s/%s/%s', $prefix, $chart_id, $this->endpoint);
+        $this->account_id = $account_id;
 
     }
-
 
     /**
      * GET /ledger/{ledger_id}/chart/{chart_id}/account
@@ -72,16 +74,15 @@ class Account extends AbstractEndpoint
      *
      * Get an Account from the current Chart by the Account id
      *
-     * @param string $account_id The UUID of the Account to fetch
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function view($account_id, array $options = array())
+    public function view(array $options = array())
     {
         $query = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get($this->endpoint . '/' . $account_id, $query, $options);
+        $response = $this->client->get($this->endpoint . '/' . $this->account_id, $query, $options);
 
         return $response;
     }
@@ -91,18 +92,17 @@ class Account extends AbstractEndpoint
      *
      * Update the data for an Account on the current Chart
      *
-     * @param string $account_id The UUID of the Account
      * @param array $body The Account data
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function update($account_id, array $body, array $options = array())
+    public function update(array $body, array $options = array())
     {
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post($this->endpoint . '/' . $account_id, $body, $options);
+        $response = $this->client->post($this->endpoint . '/' . $this->account_id, $body, $options);
 
         return $response;
     }
@@ -112,16 +112,15 @@ class Account extends AbstractEndpoint
      *
      * Delete an Account from the current Chart
      *
-     * @param string $account_id The UUID of the Account to delete
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function delete($account_id, array $options = array())
+    public function delete(array $options = array())
     {
         $body = (isset($options['body']) ? $options['body'] : array());
 
-        $response = $this->client->delete($this->endpoint . '/' . $account_id, $body, $options);
+        $response = $this->client->delete($this->endpoint . '/' . $this->account_id, $body, $options);
 
         return $response;
     }
@@ -158,7 +157,7 @@ class Account extends AbstractEndpoint
      */
     public function count(array $options = array())
     {
-        $response = $this->client->get($this->endpoint, $options);
+        $response = $this->client->get($this->endpoint . '/count', $options);
 
         return $response;
     }  

@@ -18,7 +18,7 @@ use CommonLedger\Sdk\HttpClient\ResponseHandler;
 class HttpClient
 {
     protected $options = array(
-        'base'    => 'https://api.commonledger.com',
+        'base'    => 'https://api.commonledger.io',
         'api_version' => 'v1',
         'user_agent' => 'commonledger-php-sdk/0.0.1 (https://github.com/commonledger/sdk-php)'
     );

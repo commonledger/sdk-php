@@ -2,11 +2,26 @@
 
 namespace CommonLedger\Sdk\Api;
 
+use CommonLedger\Sdk\HttpClient\HttpClient;
 
 class Ledger extends AbstractEndpoint
 {
 
     private $endpoint = 'ledger';
+    private $ledger_id;
+
+    /**
+     * Set $ledger_id class member variable to be passed to member functions to build the ledger endpoint.
+     *
+     * @param string $ledger_id The UUID of the Ledger
+     * @param HttpClient $client
+     */
+    public function __construct($ledger_id = 'current', HttpClient $client){
+
+        parent::__construct($client);
+        $this->ledger_id = $ledger_id;
+
+    }
 
     /**
      * GET /ledger
@@ -51,16 +66,15 @@ class Ledger extends AbstractEndpoint
      *
      * Get a Ledger by it's UUID
      *
-     * @param string $ledger_id The UUID of the Ledger
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function view($ledger_id, array $options = array())
+    public function view(array $options = array())
     {
         $query = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get($this->endpoint . '/' . rawurlencode($ledger_id), $query, $options);
+        $response = $this->client->get($this->endpoint . '/' . rawurlencode($this->ledger_id), $query, $options);
 
         return $response;
     }
@@ -70,18 +84,17 @@ class Ledger extends AbstractEndpoint
      *
      * Update the data for a Ledger
      *
-     * @param string $ledger_id The UUID of the Ledger
      * @param array $body The Ledger data
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function update($ledger_id, array $body, array $options = array())
+    public function update(array $body, array $options = array())
     {
         if(isset($options['body']))
             $body = array_merge($body, $options['body']);
 
-        $response = $this->client->post($this->endpoint . '/' . $ledger_id, $body, $options);
+        $response = $this->client->post($this->endpoint . '/' . $this->ledger_id, $body, $options);
 
         return $response;
     }
@@ -91,16 +104,15 @@ class Ledger extends AbstractEndpoint
      *
      * Delete a Ledger
      *
-     * @param string $ledger_id The UUID of the Ledger to delete
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function delete($ledger_id, array $options = array())
+    public function delete(array $options = array())
     {
         $body = (isset($options['body']) ? $options['body'] : array());
 
-        $response = $this->client->delete($this->endpoint . '/' . $ledger_id, $body, $options);
+        $response = $this->client->delete($this->endpoint . '/' . $this->ledger_id, $body, $options);
 
         return $response;
     }
@@ -118,7 +130,7 @@ class Ledger extends AbstractEndpoint
      */
     public function count(array $options = array())
     {
-        $response = $this->client->get($this->endpoint, $options);
+        $response = $this->client->get($this->endpoint . '/count', $options);
 
         return $response;
     }   
@@ -127,49 +139,53 @@ class Ledger extends AbstractEndpoint
     /**
      * Get the addon endpoint for a Ledger
      *
-     * @param string $ledger_id The Ledger id for the addon endpoint
+     * @param string $addon_id The Addon id for the addon endpoint, this optional id is needed and has to be overloaded
+     * if you want to call the 'Addon' class member function 'view'.
      *
      * @return Ledger\Addon
      */
-    public function addon($ledger_id)
+    public function addon($addon_id = 'current')
     {
-        return new Ledger\Addon($this->endpoint, $ledger_id, $this->client);
+        return new Ledger\Addon($this->endpoint, $this->ledger_id, $addon_id, $this->client);
     }
 
     /**
      * Get the chart endpoint for a Ledger
      *
-     * @param string $ledger_id The Ledger id for the chart endpoint
+     * @param string $chart_id The Chart id for the chart endpoint, this optional id is needed and has to be overloaded
+     * if you want to call the 'Chart' class member functions 'view', 'update', 'delete', 'account', 'tax' and 'journal'.
      *
      * @return Ledger\Chart
      */
-    public function chart($ledger_id)
+    public function chart($chart_id = 'current')
     {
-        return new Ledger\Chart($this->endpoint, $ledger_id, $this->client);
+        return new Ledger\Chart($this->endpoint, $this->ledger_id, $chart_id, $this->client);
     }
 
     /**
      * Get the document endpoint for a Ledger
      *
-     * @param string $ledger_id The Ledger id for the document endpoint
+     * @param string $document_id The Document id for the document endpoint, this optional id is needed and has to be
+     * overloaded if you want to call the 'Document' class member functions 'view' and 'update'.
      *
      * @return Ledger\Document
      */
-    public function document($ledger_id)
+    public function document($document_id = null)
     {
-        return new Ledger\Document($this->endpoint, $ledger_id, $this->client);
+        return new Ledger\Document($this->endpoint, $this->ledger_id, $document_id, $this->client);
     }
 
     /**
      * Get the report endpoint for a Ledger
      *
-     * @param string $ledger_id The Ledger id for the report endpoint
+     * @param string $report_id The Report id for the report endpoint, this optional id is needed and has to be
+     * overloaded if you want to call the 'Report' class member functions 'view'.
      *
      * @return Ledger\Report
      */
-    public function report($ledger_id)
+    public function report($report_id = null)
     {
-        return new Ledger\Report($this->endpoint, $ledger_id, $this->client);
+        return new Ledger\Report($this->endpoint, $this->ledger_id, $report_id, $this->client);
     }
 
 }
