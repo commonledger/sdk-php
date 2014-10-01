@@ -28,7 +28,7 @@ class Addon extends AbstractEndpoint
 
         $this->user_id = $user_id;
         $this->endpoint = sprintf('%s/%s/%s', $prefix, $user_id, $this->endpoint);
-        $this->$addon_id = $addon_id;
+        $this->addon_id = $addon_id;
     }
 
 
