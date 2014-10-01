@@ -16,7 +16,7 @@ class ClientException extends \ErrorException implements ExceptionInterface
     public function __construct($message, $code, GuzzleResponse $response = null) {
         $this->code = $code;
         $this->response = $response;
-        parent::__construct($message);
+        //parent::__construct($message);
     }
 
 }
