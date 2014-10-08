@@ -1,7 +1,7 @@
 <?php
 
 
-namespace CommonLedger\Sdk\Api\User\Chart;
+namespace CommonLedger\Sdk\Api\User;
 
 
 use CommonLedger\Sdk\Api\AbstractEndpoint;
@@ -10,7 +10,7 @@ use CommonLedger\Sdk\HttpClient\HttpClient;
 class Map extends AbstractEndpoint
 {
 
-    private $chart_id;
+    private $user_id;
     private $endpoint = 'map';
     private $map_id;
 
@@ -18,22 +18,22 @@ class Map extends AbstractEndpoint
      * Create a new Map endpoint relative to a Chart for a User
      *
      * @param string $prefix
-     * @param string $chart_id
+     * @param string $user_id
+     * @param string $map_id
      * @param HttpClient $client
      */
-    public function __construct($prefix, $chart_id, $map_id, HttpClient $client)
+    public function __construct($prefix, $user_id, $map_id, HttpClient $client)
     {
         parent::__construct($client);
 
-        $this->chart_id = $chart_id;
-        $this->endpoint = sprintf('%s/%s/%s', $prefix, $chart_id, $this->endpoint);
+        $this->user_id = $user_id;
+        $this->endpoint = sprintf('%s/%s/%s', $prefix, $user_id, $this->endpoint);
         $this->map_id = $map_id;
-
     }
 
 
     /**
-     * GET /user/{user_id}/chart/{chart_id}/map
+     * GET /user/{user_id}/map
      *
      * List the Maps for the current Chart
      *
@@ -50,7 +50,7 @@ class Map extends AbstractEndpoint
     }
 
     /**
-     * POST /user/{user_id}/chart/{chart_id}/map
+     * POST /user/{user_id}/map
      *
      * Create a new Map on the current Chart
      *
@@ -70,7 +70,7 @@ class Map extends AbstractEndpoint
     }
 
     /**
-     * GET /user/{user_id}/chart/{chart_id}/map/{map_id}
+     * GET /user/{user_id}/map/{map_id}
      *
      * Get an Map from the current Chart by the Map id
      *
@@ -89,7 +89,7 @@ class Map extends AbstractEndpoint
     }
 
     /**
-     * POST /user/{user_id}/chart/{chart_id}/map/{map_id}
+     * POST /user/{user_id}/map/{map_id}
      *
      * Update the data for an Map on the current Chart
      *
@@ -110,7 +110,7 @@ class Map extends AbstractEndpoint
     }
 
     /**
-     * DELETE /user/{user_id}/chart/{chart_id}/map/{map_id}
+     * DELETE /user/{user_id}/map/{map_id}
      *
      * Delete an Map from the current Chart
      *
@@ -129,7 +129,7 @@ class Map extends AbstractEndpoint
     }
 
     /**
-     * GET /user/{user_id}/chart/{chart_id}/map/count
+     * GET /user/{user_id}/map/count
      *
      * Get a count of the current number of Maps for the current Chart
      *
