@@ -165,4 +165,16 @@ class User extends AbstractEndpoint
     {
         return new User\Ledger($this->endpoint, $this->user_id, $ledger_id, $this->client);
     }
+
+    /**
+     * Get the map endpoint of a Chart
+     *
+     * @param string $map_id The Map UUID for the map endpoint, this optional id is needed if you
+     * want to call the 'Map' class member functions 'view', 'update' and 'delete'.
+     * @return Chart\Map
+     */
+    public function map($map_id = null)
+    {
+        return new User\Map($this->endpoint, $this->user_id, $map_id, $this->client);
+    }
 }

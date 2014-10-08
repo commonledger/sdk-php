@@ -167,16 +167,4 @@ class Chart extends AbstractEndpoint
         return new Chart\Tax($this->endpoint, $this->chart_id, $tax_id, $this->client);
     }
 
-    /**
-     * Get the map endpoint of a Chart
-     *
-     * @param string $map_id The Map UUID for the map endpoint, this optional id is needed if you
-     * want to call the 'Map' class member functions 'view', 'update' and 'delete'.
-     * @return Chart\Map
-     */
-    public function map($map_id = null)
-    {
-        return new Chart\Map($this->endpoint, $this->chart_id, $map_id, $this->client);
-    }
-
 }
