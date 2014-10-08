@@ -7,7 +7,7 @@ use Guzzle\Http\Message\Response as GuzzleResponse;
 /**
  * ClientException is used when the api returns an error
  */
-class ClientException extends \ErrorException implements ExceptionInterface
+class ClientException extends \ErrorException
 {
 
     public $response = null;
@@ -17,7 +17,11 @@ class ClientException extends \ErrorException implements ExceptionInterface
         $this->code = $code;
         $this->response = $response;
         $this->message = $message;
-        parent::__construct($message, $code);
+
+        if (method_exists('parent', '__construct'))
+        {
+            parent::__construct($message, $code);
+        }
     }
 
 }
