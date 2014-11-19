@@ -1,6 +1,6 @@
 {
 	"name": "commonledger/commonledger-sdk",
-	"version": "0.0.1",
+	"version": "1.0",
 	"description": "Official CommonLedger API library client for PHP",
 	"homepage": "https://commonledger.com",
 	"authors": [
@@ -18,7 +18,7 @@
 	},
 	"require": {
 		"ext-json": "*",
-		"guzzle/guzzle": "3.7.*"
+		"guzzle/guzzle": "3.9.*"
 	},
 	"support": {
 		"issues": "https://github.org/commonledger/sdk-php/issues"
