@@ -149,6 +149,31 @@ class Auth {
         return $this->oAuthRequest($params, $options);
     }
 
+    /**
+     * Obtain a new access_token using a username and password
+     * Note: This is only available on special request
+     *
+     * @param string $username  The username of the user
+     * @param array  $password  The password of the user
+     * @return array
+     */
+    public function userCredentialsToken($username, $password) {
+
+        $params = array();
+
+
+        $params = array_merge(array(
+            'client_id'		 => $this->oauth_params['client_id'],
+            'client_secret'	 => $this->oauth_params['client_secret'],
+            'scope'         =>  $this->oauth_params['scope'],
+            'grant_type'	 => 'password',
+            'username'      =>  $username,
+            'password'      =>  $password
+        ), $params);
+
+        return $this->oAuthRequest($params);
+    }
+
     private function oAuthRequest(array $params, array $options = array()){
 
         if(isset($options['params']) && is_array($options['params'])){
