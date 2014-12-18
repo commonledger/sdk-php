@@ -161,7 +161,6 @@ class Auth {
 
         $params = array();
 
-
         $params = array_merge(array(
             'client_id'		 => $this->oauth_params['client_id'],
             'client_secret'	 => $this->oauth_params['client_secret'],
@@ -171,7 +170,11 @@ class Auth {
             'password'      =>  $password
         ), $params);
 
-        return $this->oAuthRequest($params);
+        $options = array(
+            'request_type' => "form"
+        );
+
+        return $this->oAuthRequest($params, $options);
     }
 
     private function oAuthRequest(array $params, array $options = array()){
