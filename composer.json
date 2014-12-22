@@ -18,7 +18,7 @@
 	},
 	"require": {
 		"ext-json": "*",
-		"guzzle/guzzle": "3.9.*"
+		"guzzle/guzzle": "3.*"
 	},
 	"support": {
 		"issues": "https://github.org/commonledger/sdk-php/issues"
