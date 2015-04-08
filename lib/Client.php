@@ -10,6 +10,16 @@ class Client
 
     public function __construct($access_token = null, array $options = array())
     {
+        // Setting up default header options to ensure JSON is the default Accept/Content-Type
+        $options_default = array(
+            'headers' =>    array(
+                'Content-Type'  =>  'text/json',
+                'Accept'        =>  'text/json'
+            )
+        );
+
+        $options = array_merge_recursive($options_default, $options);
+
         $this->httpClient = new HttpClient($access_token, $options);
     }
 
