@@ -162,6 +162,19 @@ class Ledger extends AbstractEndpoint
         return new Ledger\Chart($this->endpoint, $this->ledger_id, $chart_id, $this->client);
     }
 
+	/**
+	 * Get the user endpoint for a Ledger
+	 *
+	 * @param string $user_id The User id for the user endpoint, this optional id is needed and has to be overloaded
+	 * if you want to call the 'User' class member functions 'view', 'add', 'update', 'delete'.
+	 *
+	 * @return Ledger\User
+	 */
+	public function user($user_id = 'current')
+	{
+		return new Ledger\User($this->endpoint, $this->ledger_id, $user_id, $this->client);
+	}
+
     /**
      * Get the document endpoint for a Ledger
      *
