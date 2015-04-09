@@ -20,7 +20,7 @@ class HttpClient
     protected $options = array(
         'base'    => 'https://api.commonledger.io',
         'api_version' => 'v1',
-        'user_agent' => 'commonledger-php-sdk/0.0.1 (https://github.com/commonledger/sdk-php)'
+        'user_agent' => 'commonledger-php-sdk/1.0 (https://github.com/commonledger/sdk-php)'
     );
 
     protected $headers = array();
