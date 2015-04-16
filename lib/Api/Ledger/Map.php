@@ -1,7 +1,7 @@
 <?php
 
 
-namespace CommonLedger\Sdk\Api\User;
+namespace CommonLedger\Sdk\Api\Ledger;
 
 
 use CommonLedger\Sdk\Api\AbstractEndpoint;
@@ -10,7 +10,7 @@ use CommonLedger\Sdk\HttpClient\HttpClient;
 class Map extends AbstractEndpoint
 {
 
-    private $user_id;
+    private $ledger_id;
     private $endpoint = 'map';
     private $map_id;
 
@@ -18,22 +18,22 @@ class Map extends AbstractEndpoint
      * Create a new Map endpoint relative to a Chart for a User
      *
      * @param string $prefix
-     * @param string $user_id
+     * @param string $ledger_id
      * @param string $map_id
      * @param HttpClient $client
      */
-    public function __construct($prefix, $user_id, $map_id, HttpClient $client)
+    public function __construct($prefix, $ledger_id, $map_id, HttpClient $client)
     {
         parent::__construct($client);
 
-        $this->user_id = $user_id;
-        $this->endpoint = sprintf('%s/%s/%s', $prefix, $user_id, $this->endpoint);
+        $this->ledger_id = $ledger_id;
+        $this->endpoint = sprintf('%s/%s/%s', $prefix, $ledger_id, $this->endpoint);
         $this->map_id = $map_id;
     }
 
 
     /**
-     * GET /user/{user_id}/map
+     * GET /ledger/{ledger_id}/map
      *
      * List the Maps for the current Chart
      *
@@ -50,7 +50,7 @@ class Map extends AbstractEndpoint
     }
 
     /**
-     * POST /user/{user_id}/map
+     * POST /ledger/{ledger_id}/map
      *
      * Create a new Map on the current Chart
      *
@@ -70,7 +70,7 @@ class Map extends AbstractEndpoint
     }
 
     /**
-     * GET /user/{user_id}/map/{map_id}
+     * GET /ledger/{ledger_id}/map/{map_id}
      *
      * Get an Map from the current Chart by the Map id
      *
@@ -89,7 +89,7 @@ class Map extends AbstractEndpoint
     }
 
     /**
-     * POST /user/{user_id}/map/{map_id}
+     * POST /ledger/{ledger_id}/map/{map_id}
      *
      * Update the data for an Map on the current Chart
      *
@@ -110,7 +110,7 @@ class Map extends AbstractEndpoint
     }
 
     /**
-     * DELETE /user/{user_id}/map/{map_id}
+     * DELETE /ledger/{ledger_id}/map/{map_id}
      *
      * Delete an Map from the current Chart
      *
@@ -129,7 +129,7 @@ class Map extends AbstractEndpoint
     }
 
     /**
-     * GET /user/{user_id}/map/count
+     * GET /ledger/{ledger_id}/map/count
      *
      * Get a count of the current number of Maps for the current Chart
      *
@@ -145,7 +145,7 @@ class Map extends AbstractEndpoint
     }
 
     /**
-     * GET /user/{user_id}/map/suggest
+     * GET /ledger/{ledger_id}/map/suggest
      *
      * Suggest mappings
      *
@@ -156,7 +156,7 @@ class Map extends AbstractEndpoint
     {
         $query = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get($this->endpoint . '/' . $this->user_id . '/map/suggest', $query, $options);
+        $response = $this->client->get($this->endpoint . '/suggest', $query, $options);
 
         return $response;
     }

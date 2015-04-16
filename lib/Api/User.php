@@ -171,7 +171,7 @@ class User extends AbstractEndpoint
      *
      * @param string $map_id The Map UUID for the map endpoint, this optional id is needed if you
      * want to call the 'Map' class member functions 'view', 'update' and 'delete'.
-     * @return Chart\Map
+     * @return User\Map
      */
     public function map($map_id = null)
     {

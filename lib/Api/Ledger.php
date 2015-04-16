@@ -201,4 +201,16 @@ class Ledger extends AbstractEndpoint
         return new Ledger\Report($this->endpoint, $this->ledger_id, $report_id, $this->client);
     }
 
+    /**
+     * Get the map endpoint of a Ledger
+     *
+     * @param string $map_id The Map UUID for the map endpoint, this optional id is needed if you
+     * want to call the 'Map' class member functions 'view', 'update' and 'delete'.
+     * @return Ledger\Map
+     */
+    public function map($map_id = null)
+    {
+        return new Ledger\Map($this->endpoint, $this->ledger_id, $map_id, $this->client);
+    }
+
 }
