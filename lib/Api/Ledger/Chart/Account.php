@@ -160,6 +160,22 @@ class Account extends AbstractEndpoint
         $response = $this->client->get($this->endpoint . '/count', $options);
 
         return $response;
-    }  
+    }
+
+	/**
+	 * GET /ledger/{ledger_id}/chart/{chart_id}/account/summary
+	 *
+	 * Get a summary balance for each Account for the current Chart
+	 *
+	 * @param array $options Optional arguments to pass to pass to the request
+	 *
+	 * @return \CommonLedger\Sdk\HttpClient\Response
+	 */
+	public function summary(array $options = array())
+	{
+		$response = $this->client->get($this->endpoint . '/summary', $options);
+
+		return $response;
+	}
 
 }
