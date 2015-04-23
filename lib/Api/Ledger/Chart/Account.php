@@ -173,7 +173,9 @@ class Account extends AbstractEndpoint
 	 */
 	public function summary(array $options = array())
 	{
-		$response = $this->client->get($this->endpoint . '/summary', $options);
+		$query = (isset($options['query']) ? $options['query'] : array());
+
+		$response = $this->client->get($this->endpoint . '/summary', $query, $options);
 
 		return $response;
 	}
