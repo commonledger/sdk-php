@@ -27,7 +27,7 @@ class Account extends AbstractEndpoint
 
         $this->chart_id = $chart_id;
         $this->endpoint = sprintf('%s/%s/%s', $prefix, $chart_id, $this->endpoint);
-        $this->account = $account_id;
+        $this->account_id = $account_id;
 
     }
 
