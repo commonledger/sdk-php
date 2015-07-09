@@ -179,4 +179,16 @@ class Chart extends AbstractEndpoint
         return new Chart\Journal($this->endpoint, $this->chart_id, $journal_id, $this->client);
     }
 
+    /**
+     * Get the transaction endpoint of a Chart
+     *
+     * @param string $transaction_id The Transaction UUID for the transaction endpoint, this optional id is needed if you
+     * want to call the 'Transaction' class member functions 'view', 'update' and 'delete'.
+     * @return Chart\Transaction
+     */
+    public function transaction($transaction_id = null)
+    {
+        return new Chart\Transaction($this->endpoint, $this->chart_id, $transaction_id, $this->client);
+    }
+
 }
