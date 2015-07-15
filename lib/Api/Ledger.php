@@ -213,4 +213,17 @@ class Ledger extends AbstractEndpoint
         return new Ledger\Map($this->endpoint, $this->ledger_id, $map_id, $this->client);
     }
 
+    /**
+     * Get the contact endpoint for a Ledger
+     *
+     * @param string $contact_id The Contact id for the contact endpoint, this optional id is needed and has to be
+     * overloaded if you want to call the 'Contact' class member functions 'view' and 'update'.
+     *
+     * @return Ledger\Contact
+     */
+    public function contact($contact_id = null)
+    {
+        return new Ledger\Contact($this->endpoint, $this->ledger_id, $contact_id, $this->client);
+    }
+
 }
