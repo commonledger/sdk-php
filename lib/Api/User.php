@@ -2,7 +2,6 @@
 
 namespace CommonLedger\Sdk\Api;
 
-
 use CommonLedger\Sdk\HttpClient\HttpClient;
 
 class User extends AbstractEndpoint
@@ -167,7 +166,7 @@ class User extends AbstractEndpoint
     }
 
     /**
-     * Get the map endpoint of a Chart
+     * Get the map endpoint of a User
      *
      * @param string $map_id The Map UUID for the map endpoint, this optional id is needed if you
      * want to call the 'Map' class member functions 'view', 'update' and 'delete'.
@@ -177,4 +176,18 @@ class User extends AbstractEndpoint
     {
         return new User\Map($this->endpoint, $this->user_id, $map_id, $this->client);
     }
+
+    /**
+     * Get the report endpoint for a User
+     *
+     * @param string $report_id The Report id for the report endpoint, this optional id is needed and has to be
+     * overloaded if you want to call the 'Report' class member functions 'view'.
+     *
+     * @return User\Report
+     */
+    public function report($report_id = null)
+    {
+        return new User\Report($this->endpoint, $this->user_id, $report_id, $this->client);
+    }
+
 }
