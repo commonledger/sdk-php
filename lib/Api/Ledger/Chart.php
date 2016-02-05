@@ -141,7 +141,25 @@ class Chart extends AbstractEndpoint
         $response = $this->client->get($this->endpoint . '/count', $options);
 
         return $response;
-    }      
+    }
+
+    /**
+     * GET /ledger/{ledger_id}/chart/{chart_id}/trialbalance
+     *
+     * Get a Trial Balance for the current Chart
+     *
+     * @param array $options Optional arguments to pass to pass to the request
+     *
+     * @return \CommonLedger\Sdk\HttpClient\Response
+     */
+    public function trialbalance(array $options = array())
+    {
+        $query = (isset($options['query']) ? $options['query'] : array());
+
+        $response = $this->client->get($this->endpoint . '/' . $this->chart_id . '/trialbalance', $query, $options);
+
+        return $response;
+    }
 
     /**
      * Get the account endpoint of a Chart
