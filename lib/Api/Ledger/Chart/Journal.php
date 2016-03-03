@@ -163,4 +163,20 @@ class Journal extends AbstractEndpoint
         return $response;
     }      
 
+    /**
+     * POST /ledger/{ledger_id}/chart/{chart_id}/journal/reverse
+     *
+     * Reverse multiple Journal objects.
+     *
+     * @param array $body An array of Journal ids
+     * @param array $options Optional arguments to pass to pass to the request
+     *
+     * @return \CommonLedger\Sdk\HttpClient\Response
+     */
+    public function reverse(array $ids, array $options = array())
+    {
+        $response = $this->client->post($this->endpoint . '/reverse', $ids, $options);
+
+        return $response;
+    }
 }
