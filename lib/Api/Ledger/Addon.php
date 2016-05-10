@@ -83,7 +83,22 @@ class Addon extends AbstractEndpoint
         $response = $this->client->get($this->endpoint . '/count', $options);
 
         return $response;
-    }   
+    }
 
+    /**
+     * POST /ledger/{ledger_id}/addon/{addon_id}
+     *
+     * Update information in an addon
+     *
+     * @param array $options Optional arguments to pass to pass to the request
+     *
+     * @return \CommonLedger\Sdk\HttpClient\Response
+     */
+    public function update(array $options = array()) {
+        $query = (isset($options['query']) ? $options['query'] : array());
+        $response = $this->client->post($this->endpoint . '/' . $this->addon_id, $query, $options);
+
+        return $response;
+    }
 
 }
