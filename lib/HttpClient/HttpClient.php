@@ -5,7 +5,7 @@ namespace CommonLedger\Sdk\HttpClient;
 use Guzzle\Http\Client as GuzzleClient;
 use Guzzle\Http\ClientInterface;
 use Guzzle\Http\Message\RequestInterface;
-
+use Commonledger\Sdk\Exception;
 use CommonLedger\Sdk\HttpClient\AuthHandler;
 use CommonLedger\Sdk\HttpClient\ErrorHandler;
 use CommonLedger\Sdk\HttpClient\RequestHandler;
@@ -63,27 +63,52 @@ class HttpClient
 
     public function get($path, array $params = array(), array $options = array())
     {
-        return $this->request($path, null, 'GET', array_merge($options, array('query' => $params)));
+        try {
+            $response = $this->request($path, null, 'GET', array_merge($options, array('query' => $params)));
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $response;
     }
 
     public function post($path, $body, array $options = array())
     {
-        return $this->request($path, $body, 'POST', $options);
+        try {
+            $response = $this->request($path, $body, 'POST', $options);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $response;
     }
 
     public function patch($path, $body, array $options = array())
     {
-        return $this->request($path, $body, 'PATCH', $options);
+        try {
+            $response = $this->request($path, $body, 'PATCH', $options);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $response;
     }
 
     public function delete($path, $body, array $options = array())
     {
-        return $this->request($path, $body, 'DELETE', $options);
+        try {
+            $response = $this->request($path, $body, 'DELETE', $options);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $response;
     }
 
     public function put($path, $body, array $options = array())
     {
-        return $this->request($path, $body, 'PUT', $options);
+        try {
+            $response = $this->request($path, $body, 'PUT', $options);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $response;
     }
 
     /**
@@ -123,6 +148,8 @@ class HttpClient
             throw new \ErrorException($e->getMessage());
         } catch (\RuntimeException $e) {
             throw new \RuntimeException($e->getMessage());
+        } catch (\Exception $e) {
+            throw $e;
         }
 
         $body = $this->getBody($response);
