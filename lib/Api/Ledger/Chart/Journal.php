@@ -6,6 +6,7 @@ namespace CommonLedger\Sdk\Api\Ledger\Chart;
 
 use CommonLedger\Sdk\Api\AbstractEndpoint;
 use CommonLedger\Sdk\HttpClient\HttpClient;
+use Commonledger\Sdk\Exception;
 
 class Journal extends AbstractEndpoint
 {
@@ -139,11 +140,15 @@ class Journal extends AbstractEndpoint
      */
     public function sync(array $body, array $options = array())
     {
-        if(isset($options['body']))
+        if (isset($options['body'])) {
             $body = array_merge($body, $options['body']);
-
-        $response = $this->client->post($this->endpoint . '/sync', $body, $options);
-
+        }
+        try {
+            $response = $this->client->post($this->endpoint . '/sync', $body, $options);
+        } catch (\Commonledger\Sdk\Exception\ClientException $e) {
+            echo $e->getMessage();
+            return false;
+        }
         return $response;
     }
 
