@@ -5,7 +5,7 @@ namespace CommonLedger\Sdk\HttpClient;
 use Guzzle\Http\Client as GuzzleClient;
 use Guzzle\Http\ClientInterface;
 use Guzzle\Http\Message\RequestInterface;
-use Commonledger\Sdk\Exception;
+
 use CommonLedger\Sdk\HttpClient\AuthHandler;
 use CommonLedger\Sdk\HttpClient\ErrorHandler;
 use CommonLedger\Sdk\HttpClient\RequestHandler;
@@ -65,7 +65,7 @@ class HttpClient
     {
         try {
             $response = $this->request($path, null, 'GET', array_merge($options, array('query' => $params)));
-        } catch (\Exception $e) {
+        } catch (\CommonLedger\Sdk\Exception\ClientException $e) {
             throw $e;
         }
         return $response;
@@ -75,7 +75,7 @@ class HttpClient
     {
         try {
             $response = $this->request($path, $body, 'POST', $options);
-        } catch (\Exception $e) {
+        } catch (\CommonLedger\Sdk\Exception\ClientException $e) {
             throw $e;
         }
         return $response;
@@ -85,7 +85,7 @@ class HttpClient
     {
         try {
             $response = $this->request($path, $body, 'PATCH', $options);
-        } catch (\Exception $e) {
+        } catch (\CommonLedger\Sdk\Exception\ClientException $e) {
             throw $e;
         }
         return $response;
@@ -95,7 +95,7 @@ class HttpClient
     {
         try {
             $response = $this->request($path, $body, 'DELETE', $options);
-        } catch (\Exception $e) {
+        } catch (\CommonLedger\Sdk\Exception\ClientException $e) {
             throw $e;
         }
         return $response;
@@ -105,7 +105,7 @@ class HttpClient
     {
         try {
             $response = $this->request($path, $body, 'PUT', $options);
-        } catch (\Exception $e) {
+        } catch (\CommonLedger\Sdk\Exception\ClientException $e) {
             throw $e;
         }
         return $response;
@@ -148,7 +148,7 @@ class HttpClient
             throw new \ErrorException($e->getMessage());
         } catch (\RuntimeException $e) {
             throw new \RuntimeException($e->getMessage());
-        } catch (\Exception $e) {
+        } catch (\CommonLedger\Sdk\Exception\ClientException $e) {
             throw $e;
         }
 
