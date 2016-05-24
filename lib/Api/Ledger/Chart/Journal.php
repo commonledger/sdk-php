@@ -139,15 +139,11 @@ class Journal extends AbstractEndpoint
      */
     public function sync(array $body, array $options = array())
     {
-        if(isset($options['body'])) {
+        if(isset($options['body']))
             $body = array_merge($body, $options['body']);
-        }
-        try {
-            $response = $this->client->post($this->endpoint . '/sync', $body, $options);
-        } catch (Exception $e){
-            echo $e->getMessage();
-            throw $e;
-        }
+
+        $response = $this->client->post($this->endpoint . '/sync', $body, $options);
+
         return $response;
     }
 
