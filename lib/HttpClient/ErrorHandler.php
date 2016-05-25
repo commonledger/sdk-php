@@ -32,9 +32,8 @@ class ErrorHandler
         else if(isset($body['data'])){
             $body = $body['data'];
         }
-
         // If JSON, a particular field is taken and used
-        if ($response->isContentType('json') && is_array($body)) {
+        if (($response->isContentType('json') || $response->isContentType('application/json')) && is_array($body)) {
             if (isset($body['status'])) {
                 $message = $body['status'];
             } elseif(isset($body['error_description'])) {
