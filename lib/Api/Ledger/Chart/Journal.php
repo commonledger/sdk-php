@@ -180,7 +180,11 @@ class Journal extends AbstractEndpoint
      */
     public function reverse(array $ids, array $options = array())
     {
-        $response = $this->client->post($this->endpoint . '/reverse', $ids, $options);
+        try {
+            $response = $this->client->post($this->endpoint . '/reverse', $ids, $options);
+        } catch (\Exception $e) {
+            die($e->getMessage());
+        }
 
         return $response;
     }

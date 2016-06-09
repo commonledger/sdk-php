@@ -155,7 +155,8 @@ class HttpClient
         $body = $this->getBody($response);
         $pagination = isset($body['pagination']) ? $body['pagination']: array();
 
-        return new Response($body['data'], $pagination, $response->getStatusCode(), $response->getHeaders());
+        $data = (isset($body['data'])) ? $body['data'] : array();
+        return new Response($data, $pagination, $response->getStatusCode(), $response->getHeaders());
     }
 
     /**

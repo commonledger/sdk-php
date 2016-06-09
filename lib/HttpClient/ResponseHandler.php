@@ -42,7 +42,7 @@ class ResponseHandler {
                 throw new ClientException($message, $code, $response);
             }
         }
-        else if($response->isSuccessful()){
+        else if (!$response->isSuccessful()) {
             throw new ClientException("Malformed response from Common Ledger API: ({$code}) {$body}", 500, $response);
         }
 
