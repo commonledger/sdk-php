@@ -165,7 +165,7 @@ class Journal extends AbstractEndpoint
     {
         $response = $this->client->get($this->endpoint . '/count', $options);
 
-        return $response;
+        return $response->body['count'];
     }      
 
     /**
