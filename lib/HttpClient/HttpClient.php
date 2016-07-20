@@ -144,6 +144,7 @@ class HttpClient
 
         try {
             $response = $this->client->send($request);
+            $body = $this->getBody($response);
         } catch (\LogicException $e) {
             throw new \ErrorException($e->getMessage());
         } catch (\RuntimeException $e) {
@@ -152,7 +153,6 @@ class HttpClient
             throw $e;
         }
 
-        $body = $this->getBody($response);
         $pagination = isset($body['pagination']) ? $body['pagination']: array();
 
         $data = (isset($body['data'])) ? $body['data'] : array();

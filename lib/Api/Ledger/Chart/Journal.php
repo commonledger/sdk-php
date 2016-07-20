@@ -145,7 +145,7 @@ class Journal extends AbstractEndpoint
         }
         try {
             $response = $this->client->post($this->endpoint . '/sync', $body, $options);
-        } catch (\Commonledger\Sdk\Exception\ClientException $e) {
+        } catch (\Exception $e) {
             echo $e->getMessage();
             return false;
         }
