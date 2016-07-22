@@ -46,11 +46,11 @@ class HttpClient
 
         $client = new GuzzleClient($base_url, $this->options);
         $this->client  = $client;
-
+/* Disable ErrorHandler
         $this->error_handler = new ErrorHandler();
         $listener = array($this->error_handler, 'onRequestError');
         $this->client->getEventDispatcher()->addListener('request.error', $listener);
-
+*/
         $this->auth_handler = new AuthHandler($access_token);
         $listener = array($this->auth_handler, 'onRequestBeforeSend');
         $this->client->getEventDispatcher()->addListener('request.before_send', $listener);
