@@ -65,7 +65,7 @@ class HttpClient
     {
         try {
             $response = $this->request($path, null, 'GET', array_merge($options, array('query' => $params)));
-        } catch (\CommonLedger\Sdk\Exception\ClientException $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
         return $response;
@@ -75,7 +75,7 @@ class HttpClient
     {
         try {
             $response = $this->request($path, $body, 'POST', $options);
-        } catch (\CommonLedger\Sdk\Exception\ClientException $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
         return $response;
@@ -85,7 +85,7 @@ class HttpClient
     {
         try {
             $response = $this->request($path, $body, 'PATCH', $options);
-        } catch (\CommonLedger\Sdk\Exception\ClientException $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
         return $response;
@@ -95,7 +95,7 @@ class HttpClient
     {
         try {
             $response = $this->request($path, $body, 'DELETE', $options);
-        } catch (\CommonLedger\Sdk\Exception\ClientException $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
         return $response;
@@ -105,7 +105,7 @@ class HttpClient
     {
         try {
             $response = $this->request($path, $body, 'PUT', $options);
-        } catch (\CommonLedger\Sdk\Exception\ClientException $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
         return $response;
