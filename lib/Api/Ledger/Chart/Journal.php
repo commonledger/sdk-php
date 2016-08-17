@@ -147,6 +147,10 @@ class Journal extends AbstractEndpoint
             $response = $this->client->post($this->endpoint . '/sync', $body, $options);
         } catch (\Exception $e) {
             echo $e->getMessage();
+            $data = $e->getData();
+            if (!empty($data)) {
+                print_r($data);
+            }
             return false;
         }
         return $response;
