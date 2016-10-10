@@ -179,6 +179,20 @@ class Chart extends AbstractEndpoint
         return $response;
     }
 
+
+    /**
+     * @param array $options
+     * @return \CommonLedger\Sdk\HttpClient\Response
+     */
+    public function getnetprofit(array $options = array())
+    {
+        $query = (isset($options['query']) ? $options['query'] : array());
+
+        $response = $this->client->get($this->endpoint . '/' . $this->chart_id . '/getnetprofit', $query, $options);
+
+        return $response;
+    }
+
     /**
      * Get the account endpoint of a Chart
      *
