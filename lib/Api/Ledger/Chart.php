@@ -162,34 +162,6 @@ class Chart extends AbstractEndpoint
     }
 
     /**
-     * Will return the transactions within a journal when given the journal_id
-     *
-     * @param array $options
-     * @return \CommonLedger\Sdk\HttpClient\Response
-     */
-    public function getTransactions(array $options = array())
-    {
-        $query = (isset($options['query']) ? $options['query'] : array());
-
-        $response = $this->client->get($this->endpoint . '/' . $this->chart_id . '/gettransactions', $query, $options);
-
-        return $response;
-    }
-
-    /**
-     * @param array $options
-     * @return \CommonLedger\Sdk\HttpClient\Response
-     */
-    public function getNetProfit(array $options = array())
-    {
-        $query = (isset($options['query']) ? $options['query'] : array());
-
-        $response = $this->client->get($this->endpoint . '/' . $this->chart_id . '/getnetprofit', $query, $options);
-
-        return $response;
-    }
-
-    /**
      * Get the account endpoint of a Chart
      *
      * @param string $account_id The Account UUID for the account endpoint, this optional id is needed if you
