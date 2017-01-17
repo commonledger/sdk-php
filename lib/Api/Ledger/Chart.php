@@ -162,29 +162,25 @@ class Chart extends AbstractEndpoint
     }
 
     /**
-     * GET /ledger/{ledger_id}/chart/{chart_id}/movementsreport
+     * Will return the transactions within a journal when given the journal_id
      *
-     * Get a Movements Report for the current Chart
-     *
-     * @param array $options Optional arguments to pass to pass to the request
-     *
+     * @param array $options
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function movementsreport(array $options = array())
+    public function getTransactions(array $options = array())
     {
         $query = (isset($options['query']) ? $options['query'] : array());
 
-        $response = $this->client->get($this->endpoint . '/' . $this->chart_id . '/movementsreport', $query, $options);
+        $response = $this->client->get($this->endpoint . '/' . $this->chart_id . '/gettransactions', $query, $options);
 
         return $response;
     }
-
 
     /**
      * @param array $options
      * @return \CommonLedger\Sdk\HttpClient\Response
      */
-    public function getnetprofit(array $options = array())
+    public function getNetProfit(array $options = array())
     {
         $query = (isset($options['query']) ? $options['query'] : array());
 

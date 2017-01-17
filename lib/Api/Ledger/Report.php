@@ -68,4 +68,22 @@ class Report extends AbstractEndpoint
         return $response;
     }
 
+    /**
+     * GET /ledger/{ledger_id}/chart/{chart_id}/movementsreport
+     *
+     * Get a Movements Report for the current Chart
+     *
+     * @param array $options Optional arguments to pass to pass to the request
+     *
+     * @return \CommonLedger\Sdk\HttpClient\Response
+     */
+    public function movementsreport(array $options = array())
+    {
+        $query = (isset($options['query']) ? $options['query'] : array());
+
+        $response = $this->client->get($this->endpoint . '/' . $this->chart_id . '/movementsreport', $query, $options);
+
+        return $response;
+    }
+
 }
