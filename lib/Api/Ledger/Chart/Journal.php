@@ -177,7 +177,7 @@ class Journal extends AbstractEndpoint
      *
      * Reverse multiple Journal objects.
      *
-     * @param array $body An array of Journal ids
+     * @param array $ids An array of Journal ids
      * @param array $options Optional arguments to pass to pass to the request
      *
      * @return \CommonLedger\Sdk\HttpClient\Response
@@ -186,6 +186,26 @@ class Journal extends AbstractEndpoint
     {
         try {
             $response = $this->client->post($this->endpoint . '/reverse', $ids, $options);
+        } catch (\Exception $e) {
+            die($e->getMessage());
+        }
+
+        return $response;
+    }
+
+    /**
+     * POST /ledger/{ledger_id}/chart/{chart_id}/journal/clearOriginIds
+     *
+     * Clear origin_ids out from the database.
+     *
+     * @param array $ids
+     * @param array $options
+     * @return \CommonLedger\Sdk\HttpClient\Response
+     */
+    public function clearOriginIds(array $ids, array $options = [])
+    {
+        try {
+            $response = $this->client->post($this->endpoint. '/clearOriginIds', $ids, $options);
         } catch (\Exception $e) {
             die($e->getMessage());
         }
