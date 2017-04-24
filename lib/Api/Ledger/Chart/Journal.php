@@ -205,7 +205,7 @@ class Journal extends AbstractEndpoint
     public function clearOriginIds(array $ids, array $options = [])
     {
         try {
-            $response = $this->client->post($this->endpoint. '/clearOriginIds', $ids, $options);
+            $response = $this->client->post($this->endpoint. '/clear_origin_ids', $ids, $options);
         } catch (\Exception $e) {
             die($e->getMessage());
         }
