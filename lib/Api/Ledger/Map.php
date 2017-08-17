@@ -1,6 +1,4 @@
 <?php
-
-
 namespace CommonLedger\Sdk\Api\Ledger;
 
 
@@ -50,6 +48,26 @@ class Map extends AbstractEndpoint
     }
 
     /**
+     * POST /ledger/{ledger_id}/map/sync
+     *
+     * Sync multiple Map objects.
+     *
+     * @param array $body An array of Map data arrays
+     * @param array $options Optional arguments to pass to pass to the request
+     *
+     * @return \CommonLedger\Sdk\HttpClient\Response
+     */
+    public function sync(array $body, array $options = array())
+    {
+        if (isset($options['body']))
+            $body = array_merge($body, $options['body']);
+
+        $response = $this->client->post($this->endpoint . '/sync', $body, $options);
+
+        return $response;
+    }
+
+    /**
      * POST /ledger/{ledger_id}/map
      *
      * Create a new Map on the current Chart
@@ -61,7 +79,7 @@ class Map extends AbstractEndpoint
      */
     public function add(array $body, array $options = array())
     {
-        if(isset($options['body']))
+        if (isset($options['body']))
             $body = array_merge($body, $options['body']);
 
         $response = $this->client->post($this->endpoint, $body, $options);
@@ -101,7 +119,7 @@ class Map extends AbstractEndpoint
      */
     public function update(array $body, array $options = array())
     {
-        if(isset($options['body']))
+        if (isset($options['body']))
             $body = array_merge($body, $options['body']);
 
         $response = $this->client->post($this->endpoint . '/' . $this->map_id, $body, $options);
